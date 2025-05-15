@@ -20,7 +20,7 @@ class Road{
             if(i > 0 && i < this.laneCount){
                 drawingContext.setLineDash([50,50])
             }else{
-                drawingContext.setLineDash([])
+                drawingContext.setLineDash([0])
             }
             line(x,this.bottom,x,this.top)
 

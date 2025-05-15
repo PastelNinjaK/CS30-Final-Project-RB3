@@ -5,7 +5,7 @@ class Controls {
     this.left = false;
     this.right = false;
     this.reverse = false;
-  }
+  }// end of constructor
 
   handleKeyPress(k, pressed) {
     switch (k) {
@@ -22,7 +22,7 @@ class Controls {
             this.reverse = pressed;
             break;
 
-    }
-  }
-}
+    }// end of switch
+  }// end of handleKeyPress
+}// end of controls
 
