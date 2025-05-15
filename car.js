@@ -26,12 +26,12 @@ class Car {
       this.speed -= this.acceleration;
     }
     
-    if(this.x - this.width < 0 || this.x + this.width > windowWidth){
-      this.speed *= -this.speed
-    }
-    if(this.y < 0){
-      this.speed -= 100
-    }
+    // if(this.x - this.width < roadX ){
+    //   this.speed *= -this.speed
+    // }
+    // if(this.y < 0){
+    //   this.speed -= 100
+    // }
 
 
     if (this.speed > this.maxSpeed) {
@@ -65,15 +65,28 @@ class Car {
     this.y -= cos(this.angle) * this.speed;
   }
 
+  // draw() {
+  //   push();
+  //   translate(this.x, this.y);
+  //   rotate(-this.angle);
+
+  //   rectMode(CENTER);
+  //   fill(255,0,0);
+  //   noStroke();
+  //   rect(0, 0, this.width, this.height,5);
+
+  //   pop();
+  // }
   draw() {
     push();
     translate(this.x, this.y);
     rotate(-this.angle);
 
-    rectMode(CENTER);
-    fill(255,0,0);
+    fill(255, 0, 0);
     noStroke();
-    rect(0, 0, this.width, this.height,5);
+    
+    // Shift the rectangle so that rotation pivots around its center
+    rect(-this.width / 2, -this.height / 2, this.width, this.height, 5);
 
     pop();
   }

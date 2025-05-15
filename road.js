@@ -4,7 +4,7 @@ class Road{
         this.x = x
         this.width = width
         this.laneCount = laneCount
-        this.left = x / 3
+        this.left = x + width/4
         this.right = windowWidth - this.left 
         const infinity = 10000000000;
         this.top = -infinity
@@ -17,17 +17,21 @@ class Road{
         stroke("white")
         for(let i = 0; i <= this.laneCount; i++){
             let x = lerp(this.left,this.right,i/this.laneCount) 
+            if(i > 0 && i < this.laneCount){
+                drawingContext.setLineDash([50,50])
+            }else{
+                drawingContext.setLineDash([])
+            }
             line(x,this.bottom,x,this.top)
-            // line(this.x,this.bottom,this.right,this.top)
+
         }
-
-
         
+    }
 
+    getLaneCenter(laneCode){
+        let laneWidth = this.width/this.laneCount;
+        return this.left + laneWidth/2+laneCode * laneWidth
     }
 }
 
 
-function lerp(a,b,t){
-    return a+(b-a)*t
-}
