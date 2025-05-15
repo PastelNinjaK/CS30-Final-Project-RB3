@@ -7,7 +7,7 @@ class Car {
 
     this.speed = 0;
     this.acceleration = 0.2;
-    this.maxSpeed = 3;
+    this.maxSpeed = 5;
     this.friction = 0.05;
     this.angle = 0;
 
@@ -66,12 +66,14 @@ class Car {
     push();
     translate(this.x, this.y);
     rotate(-this.angle);
-
+    
+    rectMode(CENTER);
     fill(255, 0, 0);
     noStroke();
+    rect(0, 0, this.width, this.height, 5);
     
-    // Shift the rectangle so that rotation pivots around its center
-    rect(-this.width / 2, -this.height / 2, this.width, this.height, 5);
+    // Optional: headlights
+
 
     pop();
   }// end of draw

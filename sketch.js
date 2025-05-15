@@ -16,9 +16,8 @@ function setup() {
   let roadWidth = windowWidth * 0.9;
   let proportionalWidth = windowWidth*0.05;
   let proportionalLength = windowWidth * 0.1
-  let startY = windowHeight - proportionalLength
   road = new Road(roadX,roadWidth);
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]),startY,proportionalWidth,proportionalLength);
+  car = new Car(road.getLaneCenter(laneCodes["lane 4"]), 0, proportionalWidth, proportionalLength);
 
 }// end of setup
 
@@ -28,9 +27,24 @@ function draw() {
 }// end of draw
 
 function sceneTest(){
-  road.draw();
+  
+  // translate(0, car.y + height * 0.7);
+  road.draw(-car.y);
+
+
+
+
+  push();
+
+  translate(0,-car.y + windowHeight * 0.7);
+  
   car.update();
   car.draw();
+
+
+
+  pop()
+  
 }// end of sceneTest
 
 function keyPressed(){
@@ -40,3 +54,8 @@ function keyPressed(){
 function keyReleased(){
   car.controls.handleKeyPress(key, false);
 }// end of keyReleased
+
+
+function scene1(){
+  
+}
