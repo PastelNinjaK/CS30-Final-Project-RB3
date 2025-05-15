@@ -56,6 +56,6 @@ function keyReleased(){
 }// end of keyReleased
 
 
-function scene1(){
-  
-}
+// function scene1(){
+
+// }

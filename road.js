@@ -22,9 +22,10 @@ class Road{
     }// end of constructor
 
     draw(carY) {
+        fill(0);
+        rect(this.right-30,-30,(this.left-this.right)+60,(windowHeight)+30)
+        fill(255);
         strokeWeight(10);
-        stroke("white");
-
         const visibleTop = carY - height;
         const visibleBottom = carY + height;
 
@@ -32,6 +33,8 @@ class Road{
             let x = lerp(this.left, this.right, i / this.laneCount);
             drawingContext.setLineDash([20, 40]);
             // line(x, this.top, x, this.bottom);
+            
+            stroke(255, 255, 0);
             line(x, visibleTop, x,this.bottom);
 
             line(x, visibleBottom, x, this.top);
@@ -39,6 +42,7 @@ class Road{
         }
 
         drawingContext.setLineDash([]);
+        stroke(255)
 
         // Draw borders within visible range
         this.borders.forEach(border => {

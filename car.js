@@ -26,6 +26,10 @@ class Car {
     if (this.controls.reverse) {
       this.speed -= this.acceleration;
     }// end of if
+
+    if (this.controls.boost){
+      this.speed *= 2;
+    }
     
     if (this.speed > this.maxSpeed) {
       this.speed = this.maxSpeed;
