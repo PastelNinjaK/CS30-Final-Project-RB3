@@ -1,46 +1,28 @@
-class Controls{
-    constructor(){
-        this.forward=false;
-        this.left=false;
-        this.right=false;
-        this.reverse=false;
+// Controls class using p5.js keyboard events
+class Controls {
+  constructor() {
+    this.forward = false;
+    this.left = false;
+    this.right = false;
+    this.reverse = false;
+  }
 
-        this.#addKeyboardListeners();
-    }
+  handleKeyPress(k, pressed) {
+    switch (k) {
+        case "a":
+            this.left = pressed;
+            break;
+        case "d":
+            this.right = pressed;
+            break;
+        case "w":
+            this.forward = pressed;
+            break;
+        case "s":
+            this.reverse = pressed;
+            break;
 
-    #addKeyboardListeners(){
-        document.onkeydown=(event)=>{
-            switch(event.key){
-                case "a":
-                    this.left=true;
-                    break;
-                case "d":
-                    this.right=true;
-                    break;
-                case "w":
-                    this.forward=true;
-                    break;
-                case "s":
-                    this.reverse=true;
-                    break;
-            }
-        }
-        document.onkeyup=(event)=>{
-            switch(event.key){
-                case "a":
-                    this.left=false;
-                    break;
-                case "d":
-                    this.right=false;
-                    break;
-                case "w":
-                    this.forward=false;
-                    break;
-                case "s":
-                    this.reverse=false;
-                    break;
-            }
-        }
     }
+  }
 }
 
