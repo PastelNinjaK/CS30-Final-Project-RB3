@@ -10,7 +10,7 @@ class Road{
         this.top = -infinity
         this.bottom = infinity
 
-    }
+    }// end of constructor
 
     draw(){
         strokeWeight(10)
@@ -24,14 +24,14 @@ class Road{
             }
             line(x,this.bottom,x,this.top)
 
-        }
+        }// end of for
         
-    }
+    }// end of draw
 
     getLaneCenter(laneCode){
         let laneWidth = this.width/this.laneCount;
         return this.left + laneWidth/2+laneCode * laneWidth
-    }
+    }// end ofgetLaneCenter
 }
 
 
