@@ -44,7 +44,7 @@ function sceneTest(){
   if(-car.y < 0){
     score = 0
   }else{
-    score = floor(-car.y/20)
+    score = floor(scoreCalc(-car.y,0.02))
   }
   // print(score)
   push();
@@ -52,7 +52,7 @@ function sceneTest(){
   scoreboard.draw(score);
   // text(score)
   translate(0,-car.y + windowHeight * 0.7);
-  car.update();
+  car.update(road.borders);
   car.draw();
   pop()
 }// end of sceneTest
@@ -79,12 +79,12 @@ function scene3(){
   sceneTest();
 }
 
-function scoreCalc(x, factor){
-    if(x < 0){
-        return 0
-    }else{
-        return x * factor
-    }
+// function scoreCalc(x, factor){
+//     if(x < 0){
+//         return 0
+//     }else{
+//         return x * factor
+//     }
 
-}// end of scoreCalc
+// }// end of scoreCalc
 

@@ -11,11 +11,13 @@ class Car {
     this.friction = 0.05;
     this.angle = 0;
 
+    this.sensor = new Sensor(this);
     this.controls = new Controls();
   }// end of constructor
 
-  update() {
+  update(roadBorders) {
     this.move();
+    this.sensor.update(roadBorders);
   }//end of update
 
   move() {
@@ -76,10 +78,10 @@ class Car {
     noStroke();
     rect(0, 0, this.width, this.height, 5);
     
-    // Optional: headlights
 
-
+    
     pop();
+    this.sensor.draw();
   }// end of draw
 
 }// of Car
