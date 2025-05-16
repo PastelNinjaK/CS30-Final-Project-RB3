@@ -31,7 +31,7 @@ class Road{
 
         for (let i = 1; i < this.laneCount; i++) {
             let x = lerp(this.left, this.right, i / this.laneCount);
-            drawingContext.setLineDash([20, 40]);
+            drawingContext.setLineDash([30, 30]);
             // line(x, this.top, x, this.bottom);
             
             stroke(255, 255, 0);
