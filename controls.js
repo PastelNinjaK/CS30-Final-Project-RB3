@@ -10,21 +10,21 @@ class Controls {
 
   handleKeyPress(k, pressed) {
     switch (k) {
-        case "a":
-            this.left = pressed;
-            break;
-        case "d":
-            this.right = pressed;
-            break;
-        case "w":
-            this.forward = pressed;
-            break;
-        case "s":
-            this.reverse = pressed;
-            break;
-        case "b":
-            this.boost = pressed;
-            break;
+      case "a":
+          this.left = pressed;
+          break;
+      case "d":
+          this.right = pressed;
+          break;
+      case "w":
+          this.forward = pressed;
+          break;
+      case "s":
+          this.reverse = pressed;
+          break;
+      case "b":
+          this.boost = pressed;
+          break;
     
 
     }// end of switch
