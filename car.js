@@ -7,10 +7,11 @@ class Car {
 
     this.speed = 0;
     this.acceleration = 0.2;
-    this.maxSpeed = 5;
+    this.maxSpeed = 10;
     this.friction = 0.05;
     this.angle = 0;
     this.damaged = false
+    this.gameOver = false;
 
     this.sensor = new Sensor(this);
     this.controls = new Controls();
@@ -22,6 +23,8 @@ class Car {
       this.polygon = this.createPolygon();
       this.damaged = this.assessDamage(roadBorders);
       this.sensor.update(roadBorders);
+    }else{
+      this.gameOver = true;
     }
 
   }//end of update

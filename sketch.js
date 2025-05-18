@@ -19,7 +19,7 @@ function setup() {
   let proportionalWidth = windowWidth*0.05;
   let proportionalLength = windowWidth * 0.1
   road = new Road(roadX,roadWidth);
-  car = new Car(road.getLaneCenter(laneCodes["lane 4"]), 0, proportionalWidth, proportionalLength);
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
   rawY = car.y
   // scoreboard = new Scoreboard(windowWidth -(windowWidth * 0.2),windowHeight - (windowWidth * 0.8),100,-rawY)
   scoreboard = new Scoreboard(windowWidth-(windowWidth * 0.2),windowHeight - (windowHeight * 0.7),100)
@@ -30,12 +30,11 @@ function setup() {
 
 function draw() {
   background(220);
-  // if(scenenum == 0){
-  //   scene1();
+  if(scenenum == 0){
+    scene1();
 
-  // }
-  // print(car.y)
-  scene3();
+  }
+  // scene3();
 }// end of draw
 
 function sceneTest(){
