@@ -1,6 +1,5 @@
 let car;
 let road;
-let rawY;
 let scoreboard;
 let laneCodes = {
   "lane 1":-2.75,
@@ -12,6 +11,14 @@ let laneCodes = {
 
 
 let scenenum = 0;
+let godMode = 0;
+let title_pic;
+
+
+
+function preload(){
+  title_pic = loadImage("images/title_image.png") 
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
   let roadX = windowWidth/2;
@@ -20,41 +27,29 @@ function setup() {
   let proportionalLength = windowWidth * 0.1
   road = new Road(roadX,roadWidth);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
-  rawY = car.y
-  // scoreboard = new Scoreboard(windowWidth -(windowWidth * 0.2),windowHeight - (windowWidth * 0.8),100,-rawY)
   scoreboard = new Scoreboard(windowWidth-(windowWidth * 0.2),windowHeight - (windowHeight * 0.7),100)
 
 
 
 }// end of setup
 
+
+
 function draw() {
   background(220);
   if(scenenum == 0){
     scene1();
+  }// end of if
 
-  }
-  // scene3();
+  if(scenenum == 1){
+    scene3();
+  }// end of if
+  if(scenenum == 2){
+    endScreen();
+  }// end of if
 }// end of draw
 
-function sceneTest(){
-  let score;
-  road.draw(-car.y);
-  if(-car.y < 0){
-    score = 0
-  }else{
-    score = floor(scoreCalc(-car.y,0.02))
-  }
-  // print(score)
-  push();
 
-  scoreboard.draw(score);
-  // text(score)
-  translate(0,-car.y + windowHeight * 0.7);
-  car.update(road.borders);
-  car.draw();
-  pop()
-}// end of sceneTest
 
 function keyPressed(){
   car.controls.handleKeyPress(key, true);
@@ -65,25 +60,9 @@ function keyReleased(){
 }// end of keyReleased
 
 
-function scene1(){
-  background(255,255,0)
-  fill(0)
-  rect(100,100,100)
-}
 
 
-function scene3(){
-  // let score = scoreCalc(-car.y)
-  // scoreboard(windowWidth - (windowHeight * 0.2),windowHeight - (windowWidth * 0.8),100,score);
-  sceneTest();
-}
 
-// function scoreCalc(x, factor){
-//     if(x < 0){
-//         return 0
-//     }else{
-//         return x * factor
-//     }
 
-// }// end of scoreCalc
+
 
