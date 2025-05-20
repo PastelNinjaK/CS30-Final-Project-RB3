@@ -8,6 +8,7 @@ class Car {
     this.speed = 0;
     this.acceleration = 0.2;
     this.maxSpeed = 10;
+    this.maxBoostSpeed = 20;
     this.friction = 0.05;
     this.angle = 0;
     this.damaged = false
@@ -31,16 +32,23 @@ class Car {
 
 
   assessDamage(roadBorders){
+    // This method checks the if the car is damaged by using an external functions in utils.js
+    // if polyIntersect == true, then the car is damaged, else it's not.
     for(let i = 0; i < roadBorders.length; i++){
       if(polyIntersect(this.polygon,roadBorders[i])){
         return true;
       }
     }
     return false;
-  }
+  }// end of assessDamage
 
 
   createPolygon() {
+    // this method is used to calcullate  the 4 points of the car.
+    // It finds the distance from the center of the car to each corner
+    // using the Pythagorean theorem and calculates the angle between the y axis and the diagonal to a corner. 
+    // This method helps the car to drawn accurately and to help detect collisions.
+    
     let points = [];
     let rad = Math.hypot(this.width, this.height) / 2;
     let alpha = Math.atan2(this.width, this.height);
@@ -69,6 +77,7 @@ class Car {
   }
 
   move() {
+    // this method has the car controls and most of the car physics, except for collision detection
     if (this.controls.forward) {
       this.speed += this.acceleration;
     }// end of if
@@ -78,13 +87,19 @@ class Car {
     }// end of if
 
     if (this.controls.boost){
-      this.speed *= 2;
-    }
-    
-    if (this.speed > this.maxSpeed) {
-      this.speed = this.maxSpeed;
+      this.speed *= 10;
     }// end of if
     
+    if (this.controls.boost){
+      if(this.speed > this.maxBoostSpeed){
+        this.speed = this.maxBoostSpeed;  
+      }// end of if
+    }// end of if
+
+    if (this.speed > this.maxSpeed && !this.controls.boost) {
+      this.speed = this.maxSpeed;
+    }// end of if
+
     if (this.speed < -this.maxSpeed / 2) {
       this.speed = -this.maxSpeed / 2;
     }// end of if

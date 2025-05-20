@@ -68,25 +68,25 @@ class Sensor{
             if(this.readings[i]){
                 end = this.readings[i];
             }
-            strokeWeight(2);
-            stroke(255,255,0);
-            line(
-                this.rays[i][0].x,
-                this.rays[i][0].y,
-                end.x,
-                end.y
-            );
-            stroke(0);
+            // strokeWeight(2);
+            // stroke(255,255,0);
+            // line(
+            //     this.rays[i][0].x,
+            //     this.rays[i][0].y,
+            //     end.x,
+            //     end.y
+            // );
+            // stroke(0);
 
-            strokeWeight(2);
-            stroke(0);
-            line(
-                end.x,
-                end.y,
-                this.rays[i][1].x,
-                this.rays[i][1].y,
-            );
-            stroke(0);
+            // strokeWeight(2);
+            // stroke(0);
+            // line(
+            //     end.x,
+            //     end.y,
+            //     this.rays[i][1].x,
+            //     this.rays[i][1].y,
+            // );
+            // stroke(0);
         }
 
     }
