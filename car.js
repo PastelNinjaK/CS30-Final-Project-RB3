@@ -87,7 +87,11 @@ class Car {
     }// end of if
 
     if (this.controls.boost){
-      this.speed *= 10;
+      this.speed += 0.5;
+      if(!this.controls.boost){
+        this.speed -= 0.2;
+
+      }
     }// end of if
     
     if (this.controls.boost){

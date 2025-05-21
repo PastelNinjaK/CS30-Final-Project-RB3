@@ -27,7 +27,7 @@ function setup() {
   let proportionalLength = windowWidth * 0.1
   road = new Road(roadX,roadWidth);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
-  scoreboard = new Scoreboard(windowWidth-(windowWidth * 0.2),windowHeight - (windowHeight * 0.7),100)
+  scoreboard = new Scoreboard(windowWidth * 0.8,windowHeight * 0.3 ,windowWidth * 0.4,windowHeight * 0.1)
 
 
 

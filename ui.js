@@ -1,5 +1,5 @@
 function button(x,y,w,h,minScene,num,admin = 0){
-  rect(x,y,w,h);
+  rect(x,y,w,h,10);
   fill(0);
   if(mouseIsPressed){
     if(scenenum == minScene){
