@@ -5,7 +5,7 @@ class Sensor{
         this.rayLength = car.width + 30;
         // this.rayLength = 300;
 
-        this.raySpread = Math.PI * 2;
+        this.raySpread = Math.PI / 4;
         this.rays = [];
         this.readings = [];
 
@@ -85,7 +85,7 @@ class Sensor{
                 end = this.readings[i];
             }
             strokeWeight(2);
-            stroke(255,255,0);
+            stroke(0,255,0);
             line(
                 this.rays[i][0].x,
                 this.rays[i][0].y,

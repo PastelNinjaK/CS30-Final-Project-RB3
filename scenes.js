@@ -64,14 +64,14 @@ function sceneTest(){
     score = floor(scoreCalc(-car.y,0.02))
   }
   push();
-  print(car.speed)
+  // print(car.speed)
   scoreboard.draw(score);
   translate(0,-car.y + windowHeight * 0.7);
-  car.update(road.borders,traffic);
-  car.draw();
   for(let i = 0; i < traffic.length; i++){
-    traffic[i].draw()
+    traffic[i].draw('blue')
   }
+  car.update(road.borders,traffic);
+  car.draw('red');
 
   pop()
   if(car.gameOver){

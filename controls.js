@@ -13,7 +13,7 @@ class Controls {
         break;
       case false:
         this.forward = false;
-        break  
+        break;  
     }
 
   }// end of constructor

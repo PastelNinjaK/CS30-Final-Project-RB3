@@ -1,5 +1,5 @@
 class Car {
-  constructor(x, y, width, height,isTraffic = true, maxSpeed = 5) {
+  constructor(x, y, width, height,isTraffic = true, maxSpeed = 6) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -16,6 +16,7 @@ class Car {
     this.gameOver = false;
     if(!isTraffic){
       this.sensor = new Sensor(this);
+      this.brain = new Network([this.sensor.rayCount,6,4]);
     }
     this.controls = new Controls(this.isTraffic);
   }// end of constructor
@@ -27,6 +28,11 @@ class Car {
       this.damaged = this.assessDamage(roadBorders,traffic);
       if(this.sensor){
         this.sensor.update(roadBorders,traffic);
+        let offset = this.sensor.readings.map(
+          s=>s==null?0:1-s.offset
+        );
+        let outputs = Network.feedForward(offset,this.brain);
+        print(outputs)
 
       }
     }else{
@@ -156,15 +162,23 @@ class Car {
   }// end of move
 
 
-  draw() {
+  draw(colour) {
 
-    if(this.damaged){
-      fill(0)
-    }else{
-      fill(255, 0, 0);
+
+    switch(colour){
+      case 'red':
+        fill(255,0,0)
+        break;
+      case 'yellow':
+        fill(255,255,0)
+        break;
+      case 'blue':
+        fill(0,0,255);
+        break;
     }
-    stroke(255, 0, 0);
+
     beginShape();
+    stroke(0);
     for (let pt of this.polygon) {
       vertex(pt.x, pt.y);
     }
