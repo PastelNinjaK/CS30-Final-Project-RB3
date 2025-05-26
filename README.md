@@ -3,6 +3,8 @@ Code is in the master Branch
 
 Server Link: http://127.0.0.1:5501/index.html
 
+// Only open if my VScode is open :(
+
 This is the GitHub for my final project.
 
 
