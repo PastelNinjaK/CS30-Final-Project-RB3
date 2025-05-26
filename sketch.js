@@ -9,15 +9,16 @@ let laneCodes = {
   "lane 5":-0.75
   };
 
-
-let scenenum = 0;
-let godMode = 0;
-let title_pic;
-
-
-
-function preload(){
-  title_pic = loadImage("images/title_image.png") 
+  let scenenum = 0;
+  let godMode = 0;
+  let title_pic;
+  let playerCars = []
+  let traffic = []
+  
+  
+  
+  function preload(){
+    title_pic = loadImage("images/title_image.png") 
 }
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,8 +27,13 @@ function setup() {
   let proportionalWidth = windowWidth*0.05;
   let proportionalLength = windowWidth * 0.1
   road = new Road(roadX,roadWidth);
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,false,10);
   scoreboard = new Scoreboard(windowWidth * 0.8,windowHeight * 0.3 ,windowWidth * 0.4,windowHeight * 0.1)
+  traffic = [new Car(road.getLaneCenter(laneCodes["lane 3"]), -car.y-car.height * 2, proportionalWidth, proportionalLength)]
+  playerCars = [car]
+  // for(let i = 0; i < traffic.length; i++){
+  //   allCars.push(traffic[i])
+  // 
 
 
 
@@ -52,11 +58,16 @@ function draw() {
 
 
 function keyPressed(){
-  car.controls.handleKeyPress(key, true);
+  for(let i = 0; i < playerCars.length; i++){
+    playerCars[i].controls.handleKeyPress(key, true);
+  }
+
 }// end of keyPressed
 
 function keyReleased(){
-  car.controls.handleKeyPress(key, false);
+  for(let i = 0; i < playerCars.length; i++){
+    playerCars[i].controls.handleKeyPress(key, false);
+  }
 }// end of keyReleased
 
 

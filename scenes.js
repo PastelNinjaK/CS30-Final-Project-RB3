@@ -4,6 +4,7 @@ function scene1(){
   
   
   
+  
   fill(0);
   textAlign(CENTER)
   textFont("ROBOTO");
@@ -51,6 +52,10 @@ function endScreen(){
 
 
 function sceneTest(){
+  for(let i = 0; i < traffic.length ; i++){
+    traffic[i].update(road.borders,[])
+
+  }
   let score;
   road.draw(-car.y);
   if(-car.y < 0){
@@ -62,8 +67,12 @@ function sceneTest(){
   print(car.speed)
   scoreboard.draw(score);
   translate(0,-car.y + windowHeight * 0.7);
-  car.update(road.borders);
+  car.update(road.borders,traffic);
   car.draw();
+  for(let i = 0; i < traffic.length; i++){
+    traffic[i].draw()
+  }
+
   pop()
   if(car.gameOver){
     scenenum++

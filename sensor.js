@@ -3,18 +3,21 @@ class Sensor{
         this.car = car;
         this.rayCount = 30;
         this.rayLength = car.width + 30;
+        // this.rayLength = 300;
+
         this.raySpread = Math.PI * 2;
         this.rays = [];
         this.readings = [];
 
     }// end of constructor
 
-    update(roadBorders){
+    update(roadBorders,traffic){
         this.castRays();
         this.readings = [];
         for(let i = 0; i < this.rays.length; i++){
             this.readings.push(
-                this.getReadings(this.rays[i],roadBorders)
+                this.getReadings(this.rays[i],roadBorders,traffic)
+                
             )
         }        
     }//end of update
@@ -40,7 +43,7 @@ class Sensor{
     
     
 
-    getReadings(ray, borders) {
+    getReadings(ray, borders,traffic) {
         let touches = [];
         for (let i = 0; i < borders.length; i++) {
             let touch = getIntersection(
@@ -54,6 +57,19 @@ class Sensor{
             }
         }
 
+        for(let i = 0; i < traffic.length; i++){
+            let poly = traffic[i].polygon;
+            for(let j = 0; j < poly.length; j++){
+                let value = getIntersection(
+                ray[0],
+                ray[1],
+                poly[j],
+                poly[(j +1) % poly.length])
+                if(value){
+                    touches.push(value)
+                }
+            }// end of for
+        }// end of for
         if (touches.length === 0) {
             return null;
         } else {
@@ -68,25 +84,25 @@ class Sensor{
             if(this.readings[i]){
                 end = this.readings[i];
             }
-            // strokeWeight(2);
-            // stroke(255,255,0);
-            // line(
-            //     this.rays[i][0].x,
-            //     this.rays[i][0].y,
-            //     end.x,
-            //     end.y
-            // );
-            // stroke(0);
+            strokeWeight(2);
+            stroke(255,255,0);
+            line(
+                this.rays[i][0].x,
+                this.rays[i][0].y,
+                end.x,
+                end.y
+            );
+            stroke(0);
 
-            // strokeWeight(2);
-            // stroke(0);
-            // line(
-            //     end.x,
-            //     end.y,
-            //     this.rays[i][1].x,
-            //     this.rays[i][1].y,
-            // );
-            // stroke(0);
+            strokeWeight(2);
+            stroke(0);
+            line(
+                end.x,
+                end.y,
+                this.rays[i][1].x,
+                this.rays[i][1].y,
+            );
+            stroke(0);
         }
 
     }

@@ -1,29 +1,34 @@
 class Car {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height,isTraffic = true, maxSpeed = 5) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.isTraffic = isTraffic;
 
     this.speed = 0;
     this.acceleration = 0.2;
-    this.maxSpeed = 10;
+    this.maxSpeed = maxSpeed;
     this.maxBoostSpeed = 20;
     this.friction = 0.05;
     this.angle = 0;
     this.damaged = false
     this.gameOver = false;
-
-    this.sensor = new Sensor(this);
-    this.controls = new Controls();
+    if(!isTraffic){
+      this.sensor = new Sensor(this);
+    }
+    this.controls = new Controls(this.isTraffic);
   }// end of constructor
 
-  update(roadBorders) {
+  update(roadBorders,traffic) {
     if(!this.damaged){
       this.move();
       this.polygon = this.createPolygon();
-      this.damaged = this.assessDamage(roadBorders);
-      this.sensor.update(roadBorders);
+      this.damaged = this.assessDamage(roadBorders,traffic);
+      if(this.sensor){
+        this.sensor.update(roadBorders,traffic);
+
+      }
     }else{
       this.gameOver = true;
     }
@@ -31,11 +36,17 @@ class Car {
   }//end of update
 
 
-  assessDamage(roadBorders){
+  assessDamage(roadBorders,traffic){
     // This method checks the if the car is damaged by using an external functions in utils.js
     // if polyIntersect == true, then the car is damaged, else it's not.
     for(let i = 0; i < roadBorders.length; i++){
       if(polyIntersect(this.polygon,roadBorders[i])){
+        return true;
+      }
+    }
+
+    for(let i = 0; i < traffic.length; i++){
+      if(polyIntersect(this.polygon,traffic[i].polygon)){
         return true;
       }
     }
@@ -85,24 +96,34 @@ class Car {
     if (this.controls.reverse) {
       this.speed -= this.acceleration;
     }// end of if
+    if(!this.controls.boost && this.speed == this.maxBoostSpeed){
+      this.speed -= this.speed * 0.1;
+    }
 
     if (this.controls.boost){
       this.speed += 0.5;
-      if(!this.controls.boost){
-        this.speed -= 0.2;
 
-      }
+    }else if(this.speed > this.maxSpeed){
+      this.speed -= this.speed * 0.1;
     }// end of if
     
+
+
     if (this.controls.boost){
+      if(!this.controls.forward){
+        this.speed -= this.speed * 0.1;
+      }
+
       if(this.speed > this.maxBoostSpeed){
-        this.speed = this.maxBoostSpeed;  
+        this.speed = this.maxBoostSpeed;
       }// end of if
     }// end of if
 
     if (this.speed > this.maxSpeed && !this.controls.boost) {
       this.speed = this.maxSpeed;
     }// end of if
+
+
 
     if (this.speed < -this.maxSpeed / 2) {
       this.speed = -this.maxSpeed / 2;
@@ -148,8 +169,10 @@ class Car {
       vertex(pt.x, pt.y);
     }
     endShape(CLOSE);
+    if(this.sensor){
+      this.sensor.draw();
 
-    this.sensor.draw();
+    }
   }// end of draw
 
 }// of Car
