@@ -1,10 +1,11 @@
 class Car {
-  constructor(x, y, width, height,isTraffic = true, maxSpeed = 6) {
+  constructor(x, y, width, height,isAI = false,isTraffic = true, maxSpeed = 6) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.isTraffic = isTraffic;
+    this.isAI = isAI;
 
     this.speed = 0;
     this.acceleration = 0.2;
@@ -30,11 +31,18 @@ class Car {
         this.sensor.update(roadBorders,traffic);
         let offset = this.sensor.readings.map(
           s=>s==null?0:1-s.offset
-        );
+        )
         let outputs = Network.feedForward(offset,this.brain);
-        print(outputs)
+        // print(outputs)
+        if(this.isAI){
+          this.controls.forward = outputs[0]
+          this.controls.left = outputs[1]
+          this.controls.right = outputs[2]
+          this.controls.reverse = outputs[3]
+        }
 
       }
+
     }else{
       this.gameOver = true;
     }

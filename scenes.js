@@ -57,24 +57,24 @@ function sceneTest(){
 
   }
   let score;
-  road.draw(-car.y);
-  if(-car.y < 0){
+  road.draw(-self_driving_car.y);
+  if(-self_driving_car.y < 0){
     score = 0
   }else{
-    score = floor(scoreCalc(-car.y,0.02))
+    score = floor(scoreCalc(-self_driving_car.y,0.02))
   }
   push();
-  // print(car.speed)
+  // print(self_driving_car.speed)
   scoreboard.draw(score);
-  translate(0,-car.y + windowHeight * 0.7);
+  translate(0,-self_driving_car.y + windowHeight * 0.7);
   for(let i = 0; i < traffic.length; i++){
     traffic[i].draw('blue')
   }
-  car.update(road.borders,traffic);
-  car.draw('red');
+  self_driving_car.update(road.borders,traffic);
+  self_driving_car.draw('red');
 
   pop()
-  if(car.gameOver){
+  if(self_driving_car.gameOver){
     scenenum++
   }
 }// end of sceneTest

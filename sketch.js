@@ -14,6 +14,7 @@ let laneCodes = {
   let title_pic;
   let playerCars = []
   let traffic = []
+  let self_driving_car;
   
   
   
@@ -27,16 +28,17 @@ function setup() {
   let proportionalWidth = windowWidth*0.05;
   let proportionalLength = windowWidth * 0.1
   road = new Road(roadX,roadWidth);
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,false,10);
+  // car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,false,false,10);
   scoreboard = new Scoreboard(windowWidth * 0.8,windowHeight * 0.3 ,windowWidth * 0.4,windowHeight * 0.1)
-  
+  self_driving_car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,false,false,10);
+
   
   
   let random_lane_int = floor(random(0,laneNames.length))
-  traffic = [new Car(road.getLaneCenter(laneCodes[laneNames[random_lane_int]]), -car.y-car.height * 2, proportionalWidth, proportionalLength)]
+  traffic = [new Car(road.getLaneCenter(laneCodes[laneNames[random_lane_int]]), -self_driving_car.y-self_driving_car.height * 2, proportionalWidth, proportionalLength)]
   print(random_lane_int)
   // traffic = [new Car(road.getLaneCenter(laneCodes["lane 3"]), -car.y-car.height * 2, proportionalWidth, proportionalLength)]
-  playerCars = [car]
+  playerCars = [self_driving_car]
   // for(let i = 0; i < traffic.length; i++){
   //   allCars.push(traffic[i])
   // 
