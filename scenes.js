@@ -95,13 +95,12 @@ function sceneTest(){
           
     }
     if(!self_driving_cars[i].damaged){
-          // self_driving_cars[i].draw('dead');
-      // self_driving_cars[i].y = bestCar.y *0.9999;
-      // self_driving_cars[i].x = bestCar.x * 0.9999;
       self_driving_cars[i].draw('dead');
-      // self_driving_cars[i].damaged = false
-    // } else {
+
     }
+    // if(self_driving_cars[i].y > bestCar.y + 100){
+    //     self_driving_cars[i].y = bestCar.y 
+    // }
   }
 
   bestCar.draw('red', true);
