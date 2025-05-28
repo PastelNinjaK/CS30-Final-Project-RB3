@@ -96,11 +96,7 @@ function sceneTest(){
     }
     if(!self_driving_cars[i].damaged){
       self_driving_cars[i].draw('dead');
-
     }
-    // if(self_driving_cars[i].y > bestCar.y + 100){
-    //     self_driving_cars[i].y = bestCar.y 
-    // }
   }
 
   bestCar.draw('red', true);

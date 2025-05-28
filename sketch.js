@@ -17,17 +17,6 @@ let traffic = [];
 let self_driving_cars = [];
 let bestCar;
 
-// Autosave best brain on window close
-window.onbeforeunload = () => {
-  try {
-    if (bestCar?.brain) {
-      localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
-      print("Best brain autosaved.");
-    }
-  } catch (e) {
-    console.warn("Failed to autosave brain:", e);
-  }
-};
 
 function preload() {
   title_pic = loadImage("images/title_image.png");
@@ -44,14 +33,15 @@ function setup() {
   road = new Road(roadX, roadWidth);
   scoreboard = new Scoreboard(windowWidth * 0.8, windowHeight * 0.3, windowWidth * 0.4, windowHeight * 0.1);
 
-  let num = 1;
+  let num = 200;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
 
   let lane_start = 2;
   let lane_factor = 3;
 
   traffic = [
-    // Multiple layers of traffic cars
+    // Multiple layers of traffic cars for training AI
+    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
@@ -68,14 +58,25 @@ function setup() {
     new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 4 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 5 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 5 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 5 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 6 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 6 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 6 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 7 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 7 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
 
   ];
 
-  
-  bestCar = self_driving_cars[0]
+  bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));
+  // bestCar = self_driving_cars[0]
   if (localStorage.getItem("bestBrain")) {
-    const brainData = JSON.parse(localStorage.getItem("bestBrain"));
+    let brainData = JSON.parse(localStorage.getItem("bestBrain"));
     for (let i = 0; i < self_driving_cars.length; i++) {
       self_driving_cars[i].brain = JSON.parse(JSON.stringify(brainData));
       if (i !== 0) {
@@ -84,15 +85,20 @@ function setup() {
     }
   }
 
-  // bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));
 
 }
 
 function draw() {
   background(220);
-  if (scenenum == 0) scene1();
-  if (scenenum == 1) scene3();
-  if (scenenum == 2) endScreen();
+  if (scenenum == 0){
+    scene1();
+  }
+  if (scenenum == 1){
+    scene3();
+  }
+  if (scenenum == 2) {
+    endScreen()
+  };
 }
 
 function keyPressed() {
@@ -116,6 +122,7 @@ function keyReleased() {
 function saveBestBrain() {
   if (bestCar?.brain) {
     localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
+    console.log('bestBrain')
     print("Best brain manually saved!");
   }
 }
