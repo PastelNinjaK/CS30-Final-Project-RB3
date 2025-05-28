@@ -183,20 +183,23 @@ class Car {
     switch(colour){
       case 'red':
         fill(255,0,0)
+        stroke(0)
         break;
       case 'yellow':
         fill(255,255,0)
+        stroke(0)
         break;
       case 'blue':
         fill(0,0,255);
+        stroke(0)
         break;
       case 'dead':
-        fill(0,0,0,100);
-        strokeWeight(2);
+        fill(0,0,0,0);
+        noStroke();
         break;
     }
     beginShape();
-    stroke(0);
+    // stroke(0);
     for (let pt of this.polygon) {
       vertex(pt.x, pt.y);
     }
