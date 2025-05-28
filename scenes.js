@@ -91,12 +91,12 @@ function sceneTest(){
   for(let i = 0; i < self_driving_cars.length; i++){
     
     if(self_driving_cars[i]!= bestCar){
-          self_driving_cars[i].draw('red');
-          // self_driving_cars[i].y = bestCar.y *0.9999;
-    
-        }
+      self_driving_cars[i].draw('red');
+          
+    }
     if(!self_driving_cars[i].damaged){
-      // self_driving_cars[i].draw('dead');
+          // self_driving_cars[i].draw('dead');
+      // self_driving_cars[i].y = bestCar.y *0.9999;
       // self_driving_cars[i].x = bestCar.x * 0.9999;
       self_driving_cars[i].draw('dead');
       // self_driving_cars[i].damaged = false
