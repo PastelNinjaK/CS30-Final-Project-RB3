@@ -45,4 +45,3 @@ function polyIntersect(poly1,poly2){
     }// end of for loop
     return false;
 }// end of polyIntersect
-

@@ -14,35 +14,62 @@ let laneCodes = {
   let title_pic;
   let playerCars = []
   let traffic = []
-  let self_driving_car;
-  
+  let self_driving_cars;
+  let bestCar;
   
   
   function preload(){
     title_pic = loadImage("images/title_image.png") 
-}
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  let roadX = windowWidth/2;
-  let roadWidth = windowWidth * 0.9;
-  let proportionalWidth = windowWidth*0.05;
-  let proportionalLength = windowWidth * 0.1
-  road = new Road(roadX,roadWidth);
-  // car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,false,false,10);
+  }
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    let roadX = windowWidth/2;
+    let roadWidth = windowWidth * 0.9;
+    let proportionalWidth = windowWidth*0.05;
+    let proportionalLength = windowWidth * 0.1
+    
+    road = new Road(roadX,roadWidth);
+  // car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,"PLAYER",10);
   scoreboard = new Scoreboard(windowWidth * 0.8,windowHeight * 0.3 ,windowWidth * 0.4,windowHeight * 0.1)
-  self_driving_car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,false,false,10);
-
+  // self_driving_car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength,"AI",10);
+  num = 200
+  self_driving_cars = makeCars(num,road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength)
   
   
   let random_lane_int = floor(random(0,laneNames.length))
-  traffic = [new Car(road.getLaneCenter(laneCodes[laneNames[random_lane_int]]), -self_driving_car.y-self_driving_car.height * 2, proportionalWidth, proportionalLength)]
-  print(random_lane_int)
-  // traffic = [new Car(road.getLaneCenter(laneCodes["lane 3"]), -car.y-car.height * 2, proportionalWidth, proportionalLength)]
-  playerCars = [self_driving_car]
-  // for(let i = 0; i < traffic.length; i++){
-  //   allCars.push(traffic[i])
-  // 
+  traffic = [
+    // 1
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y-self_driving_cars[0].height * 2, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y-self_driving_cars[0].height * 2, proportionalWidth, proportionalLength,"TRAFFIC"),
+    // 2
+    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y-self_driving_cars[0].height * 4, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y-self_driving_cars[0].height * 5, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y-self_driving_cars[0].height * 5, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y-self_driving_cars[0].height * 5, proportionalWidth, proportionalLength,"TRAFFIC"),
+    // 3
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y-self_driving_cars[0].height * 8, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y-self_driving_cars[0].height * 8, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y-self_driving_cars[0].height * 8, proportionalWidth, proportionalLength,"TRAFFIC"),
+    // 4
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y-self_driving_cars[0].height * 11, proportionalWidth, proportionalLength,"TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y-self_driving_cars[0].height * 11, proportionalWidth, proportionalLength,"TRAFFIC"),
 
+  ]
+  print(random_lane_int)
+  playerCars = []
+
+
+  bestCar = self_driving_cars.find(
+    c=>c.y==Math.min(...
+      self_driving_cars.map(c=>c.y))
+  )
+  
+if(localStorage.getItem("bestBrain")){
+  for(let i = 1; i < self_driving_cars.length; i++){
+    self_driving_cars[i].brain = JSON.parse(localStorage.getItem("bestBrain"))
+    Network.mutate(self_driving_cars[i].brain, 0.2);
+  }
+}
 
 
 }// end of setup
@@ -57,6 +84,7 @@ function draw() {
 
   if(scenenum == 1){
     scene3();
+    
   }// end of if
   if(scenenum == 2){
     endScreen();
@@ -69,6 +97,13 @@ function keyPressed(){
   for(let i = 0; i < playerCars.length; i++){
     playerCars[i].controls.handleKeyPress(key, true);
   }
+  if(key == "s" || key == "S"){
+    saveBestBrain();
+  }// end of if
+
+  if(key == "d" || key == "D"){
+    discardBestBrain();
+  }// end of if
 
 }// end of keyPressed
 
@@ -80,8 +115,23 @@ function keyReleased(){
 
 
 
+function saveBestBrain(){
+  localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
+  print("Best brain saved!");
+}
+
+function discardBestBrain(){
+  localStorage.removeItem("bestBrain");
+}
 
 
 
+function makeCars(num,x,y,w,h){
+    let car_arr = []
+    for(let i = 1; i < num; i++){
+        car_arr.push(new Car(x, y, w, h,"AI",8))
+    }
+    return car_arr
+}
 
 

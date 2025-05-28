@@ -54,27 +54,54 @@ function endScreen(){
 function sceneTest(){
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
-
   }
+
   let score;
-  road.draw(-self_driving_car.y);
-  if(-self_driving_car.y < 0){
-    score = 0
-  }else{
-    score = floor(scoreCalc(-self_driving_car.y,0.02))
-  }
-  push();
-  // print(self_driving_car.speed)
-  scoreboard.draw(score);
-  translate(0,-self_driving_car.y + windowHeight * 0.7);
-  for(let i = 0; i < traffic.length; i++){
-    traffic[i].draw('blue')
-  }
-  self_driving_car.update(road.borders,traffic);
-  self_driving_car.draw('red');
+  bestCar = self_driving_cars[0];
+  for(let i = 1; i < self_driving_cars.length; i++){
+    if(self_driving_cars[i].y < bestCar.y){
+      bestCar = self_driving_cars[i];
+    }
 
-  pop()
-  if(self_driving_car.gameOver){
-    scenenum++
   }
+  
+
+  road.draw(-bestCar.y);
+
+  // if(-self_driving_cars[0].y < 0){
+  //   score = 0;
+  // }else{
+  //   score = floor(scoreCalc(-self_driving_cars[0].y, 0.02));
+  // }
+
+  for(let i = 0; i < self_driving_cars.length; i++){
+    self_driving_cars[i].update(road.borders, traffic);
+  }
+
+  push();
+  // print(self_driving_cars.speed)
+  // scoreboard.draw(score);
+
+  translate(0, -bestCar.y + windowHeight * 0.7);
+
+  for(let i = 0; i < traffic.length; i++){
+    traffic[i].draw('blue');
+  }
+
+  for(let i = 0; i < self_driving_cars.length; i++){
+    if(self_driving_cars[i].damaged){
+      self_driving_cars[i].draw('dead');
+      self_driving_cars[i].y = bestCar.y *0.9999;
+    } else {
+      self_driving_cars[i].draw('red');
+    }
+  }
+
+  bestCar.draw('red', true);
+
+  pop();
+  
+  // if(self_driving_cars.gameOver){
+  //   scenenum++
+  // }
 }// end of sceneTest

@@ -8,10 +8,10 @@ class Controls {
     this.reverse = false;
     this.boost = false;
     switch(type){
-      case true:
+      case "TRAFFIC":
         this.forward = true;
         break;
-      case false:
+      case "PLAYER":
         this.forward = false;
         break;  
     }

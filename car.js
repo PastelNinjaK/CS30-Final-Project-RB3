@@ -1,11 +1,10 @@
 class Car {
-  constructor(x, y, width, height,isAI = false,isTraffic = true, maxSpeed = 6) {
+  constructor(x, y, width, height,type = "TRAFFIC", maxSpeed = 6) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.isTraffic = isTraffic;
-    this.isAI = isAI;
+    this.type = type;
 
     this.speed = 0;
     this.acceleration = 0.2;
@@ -15,11 +14,14 @@ class Car {
     this.angle = 0;
     this.damaged = false
     this.gameOver = false;
-    if(!isTraffic){
+    this.useBrain = (type == "AI") 
+
+    if(type != "TRAFFIC"){
       this.sensor = new Sensor(this);
-      this.brain = new Network([this.sensor.rayCount,6,4]);
+      this.brain = new Network(
+        [this.sensor.rayCount,6,4]);
     }
-    this.controls = new Controls(this.isTraffic);
+    this.controls = new Controls(this.type);
   }// end of constructor
 
   update(roadBorders,traffic) {
@@ -33,14 +35,19 @@ class Car {
           s=>s==null?0:1-s.offset
         )
         let outputs = Network.feedForward(offset,this.brain);
-        // print(outputs)
-        if(this.isAI){
+        if(this.useBrain){
           this.controls.forward = outputs[0]
           this.controls.left = outputs[1]
           this.controls.right = outputs[2]
           this.controls.reverse = outputs[3]
-        }
 
+          // this.controls.forward = 1
+          // this.controls.left = outputs[1]
+          // this.controls.right = outputs[2]
+          // this.controls.reverse = 0
+        }
+        // print(outputs)
+        
       }
 
     }else{
@@ -170,7 +177,7 @@ class Car {
   }// end of move
 
 
-  draw(colour) {
+  draw(colour,drawSensor = false) {
 
 
     switch(colour){
@@ -183,20 +190,24 @@ class Car {
       case 'blue':
         fill(0,0,255);
         break;
+      case 'dead':
+        fill(0,0,0,100);
+        strokeWeight(2);
+        break;
     }
-
     beginShape();
     stroke(0);
     for (let pt of this.polygon) {
       vertex(pt.x, pt.y);
     }
     endShape(CLOSE);
-    if(this.sensor){
+    
+    if(this.sensor && drawSensor){
       this.sensor.draw();
-
+  
     }
   }// end of draw
-
+  
 }// of Car
 
 
