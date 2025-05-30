@@ -212,6 +212,3 @@ class Car {
   }// end of draw
   
 }// of Car
-
-
-

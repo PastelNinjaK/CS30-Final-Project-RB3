@@ -59,7 +59,7 @@ function sceneTest(){
   let score;
   bestCar = self_driving_cars[0];
   for(let i = 1; i < self_driving_cars.length; i++){
-    if(self_driving_cars[i].y < bestCar.y){
+    if(self_driving_cars[i].y < bestCar.y - 100){
       bestCar = self_driving_cars[i];
     }
 
@@ -92,11 +92,18 @@ function sceneTest(){
     
     if(self_driving_cars[i]!= bestCar){
       self_driving_cars[i].draw('red');
-          
     }
     if(!self_driving_cars[i].damaged){
       self_driving_cars[i].draw('dead');
     }
+
+    // if(self_driving_cars[i].damaged){
+    //   self_driving_cars.x = bestCar.x;
+    //   self_driving_cars.y = bestCar.y;
+    //   self_driving_cars.brain = bestCar.brain;
+    //   self_driving_cars[i].damaged = false;
+    //   Network.mutate(self_driving_cars[i].brain,0.5)
+    // }
   }
 
   bestCar.draw('red', true);

@@ -122,7 +122,7 @@ function keyReleased() {
 function saveBestBrain() {
   if (bestCar?.brain) {
     localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
-    console.log('bestBrain')
+    console.log(JSON.stringify(bestCar.brain))
     print("Best brain manually saved!");
   }
 }

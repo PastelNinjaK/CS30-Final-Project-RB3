@@ -40,4 +40,3 @@ class Controls {
     }// end of switch
   }// end of handleKeyPress
 }// end of controls
-
