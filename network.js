@@ -38,7 +38,6 @@ class Network{
             }
         });
     }
-
 }
 
 class Level{
