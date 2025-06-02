@@ -1,7 +1,7 @@
 # CS30-Final-Project-RB3
 Code is in the master Branch
 
-Server Link: http://127.0.0.1:5501/index.html
+Server Link: http://127.0.0.1:5502/index.html
 
 // Only open if my VScode is open :(
 
