@@ -12,8 +12,7 @@ class Car {
     this.maxBoostSpeed = 20;
     this.friction = 0.05;
     this.angle = 0;
-    this.damaged = false
-    this.gameOver = false;
+    this.damaged = false;
     this.useBrain = (type == "AI") 
 
     if(type != "TRAFFIC"){
@@ -50,8 +49,6 @@ class Car {
         
       }// end of if
 
-    }else{
-      this.gameOver = true;
     }// end of if
 
   }//end of update
@@ -206,7 +203,7 @@ class Car {
     endShape(CLOSE);
     
     if(this.sensor && drawSensor){
-      this.sensor.draw();
+      // this.sensor.draw();
     }// end of if
   
   }// end of draw

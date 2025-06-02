@@ -70,7 +70,7 @@ function setup() {
   road = new Road(roadX, roadWidth);
   scoreboard = new Scoreboard(windowWidth * 0.8, windowHeight * 0.3, windowWidth * 0.4, windowHeight * 0.1);
 
-  let num = 1;
+  let num = 200;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
   let lane_start = 2;
@@ -99,12 +99,12 @@ function setup() {
     new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
     new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 7 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 7 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 11 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 11 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
     // new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
     // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
 
@@ -161,22 +161,3 @@ function keyReleased() {
   }
 }
 
-function saveBestBrain() {
-  if (bestCar?.brain) {
-    localStorage.setItem("myNeuralNetData", JSON.stringify(bestCar.brain));
-    print("Best brain manually saved!");
-  }// end of if
-}// end of saveBestBrain
-
-function discardBestBrain() {
-  localStorage.clear()
-  print("Best brain discarded.");
-}// end of discardBestBrain
-
-function makeCars(num, x, y, w, h) {
-  let car_arr = [];
-  for (let i = 0; i < num; i++) {
-    car_arr.push(new Car(x, y, w, h, "AI", 8));
-  }// end of for
-  return car_arr;
-}// end of makeCars

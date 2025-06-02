@@ -45,3 +45,27 @@ function polyIntersect(poly1,poly2){
     }// end of for loop
     return false;
 }// end of polyIntersect
+
+
+
+
+
+function saveBestBrain() {
+  if (bestCar?.brain) {
+    localStorage.setItem("myNeuralNetData", JSON.stringify(bestCar.brain));
+    print("Best brain manually saved!");
+  }// end of if
+}// end of saveBestBrain
+
+function discardBestBrain() {
+  localStorage.clear()
+  print("Best brain discarded.");
+}// end of discardBestBrain
+
+function makeCars(num, x, y, w, h) {
+  let car_arr = [];
+  for (let i = 0; i < num; i++) {
+    car_arr.push(new Car(x, y, w, h, "AI", 8));
+  }// end of for
+  return car_arr;
+}// end of makeCars

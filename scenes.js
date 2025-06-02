@@ -44,7 +44,7 @@ function scene3(){
   }else{
     trafficSim()
   }// end of if
-}// end of scene 3
+}// end of scene3
 
 
 function endScreen(){
@@ -54,10 +54,12 @@ function endScreen(){
 
 
 function trafficSim(){
+  score = floor(scoreCalc(-car.y,0.01))
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
   }//end of for  
   road.draw(-car.y);
+  scoreboard.draw(score)
   car.update(road.borders,traffic)
   push();
 
@@ -68,7 +70,9 @@ function trafficSim(){
   }// end of for
   car.draw('red')
   pop()
-
+  if(car.damaged){
+    scenenum++
+  }// end of if
 
 }// end of trafficSim
 
@@ -78,6 +82,9 @@ function AITest(){
   }// end of for
 
   bestCar = self_driving_cars[0];
+  score = floor(scoreCalc(-bestCar.y,0.008))
+  scoreboard.draw(score)
+
   for(let i = 1; i < self_driving_cars.length; i++){
     if(self_driving_cars[i].y < bestCar.y){
       bestCar = self_driving_cars[i];
@@ -117,9 +124,11 @@ function AITest(){
 
   }// end of for
 
-  bestCar.draw('red', true);
+  bestCar.draw('blue', true);
 
   pop();
-  
+  // if(bestCar.damaged){
+  //   scenenum++
+  // }// end of if
 
 }// end of AITest
