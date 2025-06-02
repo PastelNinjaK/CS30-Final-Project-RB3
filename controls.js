@@ -14,7 +14,7 @@ class Controls {
       case "PLAYER":
         this.forward = false;
         break;  
-    }
+    }// end of switch
 
   }// end of constructor
 

@@ -48,11 +48,11 @@ class Car {
         }
         // print(outputs)
         
-      }
+      }// end of if
 
     }else{
       this.gameOver = true;
-    }
+    }// end of if
 
   }//end of update
 
@@ -63,14 +63,14 @@ class Car {
     for(let i = 0; i < roadBorders.length; i++){
       if(polyIntersect(this.polygon,roadBorders[i])){
         return true;
-      }
-    }
+      }// end of if
+    }// end of for
 
     for(let i = 0; i < traffic.length; i++){
       if(polyIntersect(this.polygon,traffic[i].polygon)){
         return true;
-      }
-    }
+      }// end of if
+    }// end of for
     return false;
   }// end of assessDamage
 
@@ -106,7 +106,7 @@ class Car {
     });
 
     return points;
-  }
+  }// end of createPolygon
 
   move() {
     // this method has the car controls and most of the car physics, except for collision detection
@@ -119,7 +119,7 @@ class Car {
     }// end of if
     if(!this.controls.boost && this.speed == this.maxBoostSpeed){
       this.speed -= this.speed * 0.1;
-    }
+    }// end of if
 
     if (this.controls.boost){
       this.speed += 0.5;
@@ -133,7 +133,7 @@ class Car {
     if (this.controls.boost){
       if(!this.controls.forward){
         this.speed -= this.speed * 0.1;
-      }
+      }// end of if
 
       if(this.speed > this.maxBoostSpeed){
         this.speed = this.maxBoostSpeed;
@@ -197,18 +197,18 @@ class Car {
         fill(0,0,0,0);
         noStroke();
         break;
-    }
+    }// end of switch
     beginShape();
     // stroke(0);
     for (let pt of this.polygon) {
       vertex(pt.x, pt.y);
-    }
+    }// end of for
     endShape(CLOSE);
     
     if(this.sensor && drawSensor){
       this.sensor.draw();
+    }// end of if
   
-    }
   }// end of draw
   
 }// of Car

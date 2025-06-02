@@ -24,7 +24,7 @@ function scene1(){
   strokeWeight(20)
   textSize(35)
   text("God Mode",windowWidth * 0.5,windowHeight * 0.8)
-}
+}// end of scene1
 
 
 
@@ -36,85 +36,90 @@ function scene2(){
     background(0)
   };
 
-}
+}// end of scene2
 
 function scene3(){
-  sceneTest();
-}
+  if(godMode == 1){
+    AITest();
+  }else{
+    trafficSim()
+  }// end of if
+}// end of scene 3
 
 
 function endScreen(){
   background(255);
   rect(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2)
-}
+}// end of endScreen
 
 
-
-
-function sceneTest(){
+function trafficSim(){
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
-  }
+  }//end of for  
+  road.draw(-car.y);
+  car.update(road.borders,traffic)
+  push();
 
-  let score;
+  translate(0, -car.y + windowHeight * 0.7);
+  
+  for(let i = 0; i < traffic.length; i++){
+    traffic[i].draw('blue');
+  }// end of for
+  car.draw('red')
+  pop()
+
+
+}// end of trafficSim
+
+function AITest(){
+  for(let i = 0; i < traffic.length ; i++){
+    traffic[i].update(road.borders,[])
+  }// end of for
+
   bestCar = self_driving_cars[0];
   for(let i = 1; i < self_driving_cars.length; i++){
     if(self_driving_cars[i].y < bestCar.y){
       bestCar = self_driving_cars[i];
-    }
+    }// end of if
 
-  }
-
-  // if (localStorage.getItem("myNeuralNetData")) {
-  //   let brainData = JSON.parse(localStorage.getItem("myNeuralNetData"));
-  //   for (let i = 0; i < self_driving_cars.length; i++) {
-  //     self_driving_cars[i].brain = JSON.parse(JSON.stringify(brainData));
-  //     if (i !== 0) {
-  //       Network.mutate(self_driving_cars[i].brain,0.1);
-  //     }
-  //   }
-  // }
-  
-
+  }// end of for
   road.draw(-bestCar.y);
-
-  // if(-self_driving_cars[0].y < 0){
-  //   score = 0;
-  // }else{
-  //   score = floor(scoreCalc(-self_driving_cars[0].y, 0.02));
-  // }
-
   for(let i = 0; i < self_driving_cars.length; i++){
     self_driving_cars[i].update(road.borders, traffic);
-  }
+  }// end of for
 
   push();
-  // print(self_driving_cars.speed)
-  // scoreboard.draw(score);
-
+  
   translate(0, -bestCar.y + windowHeight * 0.7);
 
   for(let i = 0; i < traffic.length; i++){
     traffic[i].draw('blue');
-  }
+  }// end of for
 
   for(let i = 0; i < self_driving_cars.length; i++){
     
     if(self_driving_cars[i]!= bestCar){
       self_driving_cars[i].draw('red');
           
-    }
+    }// end of if
     if(!self_driving_cars[i].damaged){
       self_driving_cars[i].draw('dead');
-    }
+    }// end of if
 
-  }
+    // if(self_driving_cars[i].damaged && self_driving_cars[i]!= bestCar){
+    //   self_driving_cars[i].x = bestCar.x
+    //   self_driving_cars[i].y = bestCar.y * 0.99
+    //   self_driving_cars[i].brain = bestCar.brain
+    //   Network.mutate(self_driving_cars[i].brain,0.2)
+    //   self_driving_cars[i].damaged = false
+    // }
+
+  }// end of for
 
   bestCar.draw('red', true);
 
   pop();
   
-  // if(self_driving_cars.gameOver){
-  //   scenenum++
-  // }
-}// end of sceneTest
+
+}// end of AITest
