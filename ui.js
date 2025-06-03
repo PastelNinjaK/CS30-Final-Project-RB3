@@ -16,7 +16,7 @@ function button(x,y,w,h,minScene,num,admin = 0){
       
       if(x1 && x2 && y1 && y2 && adminCondition){
         scenenum = num;
-        godMode++
+        godMode = 1
       }// end of if      
     
     }// end of if

@@ -19,6 +19,8 @@ let playerCars = [];
 let traffic = [];
 let self_driving_cars = [];
 let bestCar;
+let lane_start = 2;
+let lane_factor = 3;
 let data = {
   levels: [
     {
@@ -50,7 +52,9 @@ let data = {
 };
 
 
-let score;
+let score = 0;
+let standardWidth;
+let standardHeight;
 
 
 function preload() {
@@ -66,16 +70,16 @@ function setup() {
   let roadWidth = windowWidth * 0.9;
   let proportionalWidth = windowWidth * 0.05;
   let proportionalLength = windowWidth * 0.1;
-
+  standardWidth = proportionalWidth
+  standardHeight = proportionalLength
   road = new Road(roadX, roadWidth);
   scoreboard = new Scoreboard(windowWidth * 0.8, windowHeight * 0.3, windowWidth * 0.4, windowHeight * 0.1);
 
   let num = 200;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
-  let lane_start = 2;
-  let lane_factor = 3;
-
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
+  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 8)
   traffic = [
     // Multiple layers of traffic cars for training AI
     // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
@@ -128,15 +132,21 @@ function setup() {
 
 function draw() {
   background(220);
+
   if (scenenum == 0){
     scene1();
   }// end of if
   if (scenenum == 1){
+    scene2();
+  }
+  if (scenenum == 2){
     scene3();
   }// end of if
-  if (scenenum == 2) {
+  if (scenenum == 3) {
     endScreen()
+    reset()
   }// end of if
+  // endScreen()
 }// end of draw
 
 function keyPressed() {
@@ -151,8 +161,15 @@ function keyPressed() {
   }// end of if
 
   if(key == "p"){
-    print(godMode)
+    print(godMode == 1)
   }// end of if
+
+  if(key == 't'){
+    print(scenenum)
+  }
+  if(key == 'r' && scenenum == 2){
+    reset()
+  }
 }
 
 function keyReleased() {

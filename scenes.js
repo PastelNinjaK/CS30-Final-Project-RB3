@@ -2,9 +2,7 @@ function scene1(){
   background(253, 218, 13);
   // line(windowWidth/2,0,windowWidth/2,windowHeight)
   
-  
-  
-  
+  // noStroke();
   fill(0);
   textAlign(CENTER)
   textFont("ROBOTO");
@@ -12,17 +10,17 @@ function scene1(){
   image(title_pic,windowWidth * 0.2775,-windowHeight * 0.1,windowWidth * 0.457)
   // Normal Button
   fill(128, 128, 128)
+  stroke(0)
   button(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2,0,1)
   strokeWeight(20)
   textSize(35)
-  text("Normal Mode",windowWidth * 0.5,windowHeight * 0.5)
   fill(128, 128, 128)
-  // fill(255)
   // God Mode Button
   button(windowWidth * 0.3,windowHeight * 0.7,windowWidth * 0.4,windowHeight*0.2,0,1,1)
   fill(0)
-  strokeWeight(20)
   textSize(35)
+  noStroke()
+  text("Normal Mode",windowWidth * 0.5,windowHeight * 0.5)
   text("God Mode",windowWidth * 0.5,windowHeight * 0.8)
 }// end of scene1
 
@@ -32,9 +30,13 @@ function scene1(){
 function scene2(){
   if(godMode == 1){
     background(255)
+    button(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2,1,2)
+
   }else{
     background(0)
-  };
+    button(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2,1,2)
+
+  }// end of if
 
 }// end of scene2
 
@@ -42,18 +44,36 @@ function scene3(){
   if(godMode == 1){
     AITest();
   }else{
-    trafficSim()
+    trafficSim();
   }// end of if
 }// end of scene3
 
-
 function endScreen(){
-  background(255);
-  rect(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2)
-}// end of endScreen
+
+
+  background(253, 218, 13);
+  fill(255)
+  stroke(0)
+  strokeWeight(3)
+  rect(windowWidth * 0.3,windowHeight * 0.5, windowWidth  * 0.4, windowHeight * 0.2,5)
+  textFont("ROBOTO")
+  // Restart Button 
+  button(windowWidth * 0.3,windowHeight * 0.1, windowWidth  * 0.4, windowHeight * 0.1,2,0)
+
+  textAlign(CENTER);
+  textSize(35);
+  noStroke();
+  text("Restart",windowWidth * 0.5, windowHeight * 0.15);
+  
+  
+  text(`Your Final Score is: ${score}`,windowWidth * 0.5, windowHeight * 0.6 );
+ 
+ 
+}
 
 
 function trafficSim(){
+  // background(124,252,0)
   score = floor(scoreCalc(-car.y,0.01))
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
@@ -132,3 +152,46 @@ function AITest(){
   // }// end of if
 
 }// end of AITest
+
+function reset(){
+  godMode = 0
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 10)
+  playerCars = [car]
+
+  traffic = [
+    // Multiple layers of traffic cars for training AI
+    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * lane_start, standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * lane_start, standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - standardHeight * lane_start, standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - standardHeight * (lane_start + 2 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 2 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 3 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 3 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 4 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 4 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 5 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 5 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 6 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 6 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 7 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - standardHeight * (lane_start + 7 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 8 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 8 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 8 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 9 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 9 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 10 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 10 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 11 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 11 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    // new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 9 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 10 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+
+  ];
+}
+
+
+
