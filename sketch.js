@@ -1,6 +1,6 @@
 let car1;
 let car2;
-
+let whichCar = 0;
 let car;
 let road;
 let scoreboard;
@@ -78,7 +78,7 @@ function setup() {
   let num = 200;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
-  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 9)
   car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 8)
   traffic = [
     // Multiple layers of traffic cars for training AI
@@ -113,7 +113,7 @@ function setup() {
     // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
 
   ];
-  playerCars = [car]
+  playerCars = [car,car1,car2]
 
     bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));
     // bestCar = self_driving_cars[0]
@@ -143,10 +143,10 @@ function draw() {
     scene3();
   }// end of if
   if (scenenum == 3) {
-    endScreen()
-    reset()
+    endScreen();
+    reset();
   }// end of if
-  // endScreen()
+  // scene2();
 }// end of draw
 
 function keyPressed() {
@@ -167,8 +167,8 @@ function keyPressed() {
   if(key == 't'){
     print(scenenum)
   }
-  if(key == 'r' && scenenum == 2){
-    reset()
+  if(key == 'r'){
+    print(whichCar)
   }
 }
 

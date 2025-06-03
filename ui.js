@@ -1,4 +1,4 @@
-function button(x,y,w,h,minScene,num,admin = 0){
+function button(x,y,w,h,minScene,num,admin = 0,isCarButton = false,carnum){
   rect(x,y,w,h,10);
   fill(0);
   if(mouseIsPressed){
@@ -17,7 +17,13 @@ function button(x,y,w,h,minScene,num,admin = 0){
       if(x1 && x2 && y1 && y2 && adminCondition){
         scenenum = num;
         godMode = 1
-      }// end of if      
+      }// end of if 
+      if(x1 && x2 && y1 && y2 && isCarButton){
+        whichCar = carnum
+        scenenum = num;
+
+      }
+      
     
     }// end of if
   }// end of if

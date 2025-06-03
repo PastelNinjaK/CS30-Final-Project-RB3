@@ -28,16 +28,15 @@ function scene1(){
 
 
 function scene2(){
-  if(godMode == 1){
-    background(255)
-    button(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2,1,2)
-
-  }else{
-    background(0)
-    button(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2,1,2)
-
-  }// end of if
-
+  background(253, 218, 13);
+  
+  // Car 1 button
+  stroke(0)
+  fill(255)
+  button(windowWidth * 0.05,windowHeight * 0.3,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,1)
+  fill(255)
+  // Car 2 button
+  button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
 }// end of scene2
 
 function scene3(){
@@ -58,7 +57,7 @@ function endScreen(){
   rect(windowWidth * 0.3,windowHeight * 0.5, windowWidth  * 0.4, windowHeight * 0.2,5)
   textFont("ROBOTO")
   // Restart Button 
-  button(windowWidth * 0.3,windowHeight * 0.1, windowWidth  * 0.4, windowHeight * 0.1,2,0)
+  button(windowWidth * 0.3,windowHeight * 0.1, windowWidth  * 0.4, windowHeight * 0.1,3,0)
 
   textAlign(CENTER);
   textSize(35);
@@ -88,7 +87,15 @@ function trafficSim(){
   for(let i = 0; i < traffic.length; i++){
     traffic[i].draw('blue');
   }// end of for
-  car.draw('red')
+  if(whichCar == 1){
+    car.draw('red')
+
+  }else if(whichCar == 2){
+    car.draw('yellow')
+  }else{
+    car.draw('blue')
+
+  }
   pop()
   if(car.damaged){
     scenenum++
