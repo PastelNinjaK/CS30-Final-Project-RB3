@@ -9,7 +9,7 @@ class Car {
     this.speed = 0;
     this.acceleration = 0.2;
     this.maxSpeed = maxSpeed;
-    this.maxBoostSpeed = 20;
+    this.maxBoostSpeed = this.maxSpeed * 2;
     this.friction = 0.05;
     this.angle = 0;
     this.damaged = false;
@@ -21,6 +21,7 @@ class Car {
         [this.sensor.rayCount,6,4]);
     }
     this.controls = new Controls(this.type);
+    this.carImageArr =  car_pics;
   }// end of constructor
 
   update(roadBorders,traffic) {
@@ -175,35 +176,35 @@ class Car {
 
 
   draw(colour,drawSensor = false) {
-
+    let car_pic = this.carImageArr[0]
 
     switch(colour){
       case 'red':
-        fill(255,0,0)
-        stroke(0)
+      car_pic = this.carImageArr[1]  
         break;
-      case 'yellow':
-        fill(255,255,0)
-        stroke(0)
+      case 'gray':
+        car_pic = this.carImageArr[2]  
         break;
       case 'blue':
-        fill(0,0,255);
-        stroke(0)
-        break;
-      case 'dead':
-        fill(0,0,0,0);
-        noStroke();
+        car_pic = this.carImageArr[0]  
         break;
     }// end of switch
-    beginShape();
-    // stroke(0);
-    for (let pt of this.polygon) {
-      vertex(pt.x, pt.y);
-    }// end of for
-    endShape(CLOSE);
+    // beginShape();
+    // // stroke(0);
+    // for (let pt of this.polygon) {
+    //   vertex(pt.x, pt.y);
+    // }// end of for
+    // endShape(CLOSE);
+
+
+    push();
+    translate(this.x,this.y)
+    rotate(-this.angle)
+    image(car_pic,-this.width/2,-this.height/2, this.width,this.height)
+    pop();
     
     if(this.sensor && drawSensor){
-      // this.sensor.draw();
+      this.sensor.draw();
     }// end of if
   
   }// end of draw

@@ -55,15 +55,22 @@ let data = {
 let score = 0;
 let standardWidth;
 let standardHeight;
+let gray_car_pic;
+let blue_car_pic;
+let red_car_pic;
+let car_pics;
 
 
 function preload() {
   title_pic = loadImage("images/title_image.png");
+  gray_car_pic = loadImage("images/gray_car.png");
+  blue_car_pic = loadImage("images/blue_car.png");
+  red_car_pic = loadImage("images/red_car.png");
+  car_pics = [blue_car_pic,red_car_pic,gray_car_pic]
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // localStorage.clear()
   // localStorage.setItem("myNeuralNetData", JSON.stringify(data));
 
   let roadX = windowWidth / 2;
@@ -75,44 +82,41 @@ function setup() {
   road = new Road(roadX, roadWidth);
   scoreboard = new Scoreboard(windowWidth * 0.8, windowHeight * 0.3, windowWidth * 0.4, windowHeight * 0.1);
 
-  let num = 200;
+  let num = 1;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
   car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 9)
   car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 8)
-  traffic = [
-    // Multiple layers of traffic cars for training AI
-    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * lane_start, proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 2 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 2 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 3 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 3 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 4 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 4 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 5 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 5 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 6 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 6 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 7 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 7 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 8 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 11 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 11 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 9 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - proportionalLength * (lane_start + 10 * lane_factor), proportionalWidth, proportionalLength, "TRAFFIC"),
 
-  ];
+
+
+  let lanePattern = [
+  [1, 0],
+  [2, 4, 1],
+  [0, 3],
+  [1, 2],
+  [4, 2],
+  [1, 4],
+  [3, 1],
+  [1, 0],
+  [1, 2],
+  [1, 3],
+  [2, 4],
+  [2, 3],
+  [1, 3]
+];
+
+traffic = [];
+
+for (let i = 0; i < lanePattern.length; i++) {
+  let y = -self_driving_cars[0].y - proportionalLength * (lane_start + i * lane_factor);
+
+  for (let j = 0; j < lanePattern[i].length; j++) {
+    let laneIndex = lanePattern[i][j];
+    let x = road.getLaneCenter(laneCodes[laneNames[laneIndex]]);
+    traffic.push(new Car(x, y, proportionalWidth, proportionalLength, "TRAFFIC"));
+  }
+}
   playerCars = [car,car1,car2]
 
     bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));
@@ -161,7 +165,7 @@ function keyPressed() {
   }// end of if
 
   if(key == "p"){
-    print(godMode == 1)
+    print(localStorage)
   }// end of if
 
   if(key == 't'){

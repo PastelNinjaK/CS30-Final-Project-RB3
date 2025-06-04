@@ -73,35 +73,39 @@ function endScreen(){
 
 function trafficSim(){
   // background(124,252,0)
-  score = floor(scoreCalc(-car.y,0.01))
+  let playerCar = playerCars[whichCar]
+  score = floor(scoreCalc(-playerCar.y,0.01))
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
   }//end of for  
-  road.draw(-car.y);
+  road.draw(-playerCar.y);
   scoreboard.draw(score)
-  car.update(road.borders,traffic)
+  playerCar.update(road.borders,traffic)
   push();
 
-  translate(0, -car.y + windowHeight * 0.7);
+  translate(0, -playerCar.y + windowHeight * 0.7);
   
   for(let i = 0; i < traffic.length; i++){
     traffic[i].draw('blue');
   }// end of for
   if(whichCar == 1){
-    car.draw('red')
+    playerCar.draw('red')
 
   }else if(whichCar == 2){
-    car.draw('yellow')
+    playerCar.draw('gray')
   }else{
-    car.draw('blue')
+    playerCar.draw('blue')
 
   }
   pop()
-  if(car.damaged){
+  if(playerCar.damaged){
     scenenum++
   }// end of if
 
 }// end of trafficSim
+
+
+
 
 function AITest(){
   for(let i = 0; i < traffic.length ; i++){
@@ -134,7 +138,7 @@ function AITest(){
   for(let i = 0; i < self_driving_cars.length; i++){
     
     if(self_driving_cars[i]!= bestCar){
-      self_driving_cars[i].draw('red');
+      self_driving_cars[i].draw('blue');
           
     }// end of if
     if(!self_driving_cars[i].damaged){
@@ -151,7 +155,7 @@ function AITest(){
 
   }// end of for
 
-  bestCar.draw('blue', true);
+  bestCar.draw('red', true);
 
   pop();
   // if(bestCar.damaged){
@@ -163,41 +167,41 @@ function AITest(){
 function reset(){
   godMode = 0
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 10)
-  playerCars = [car]
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 9)
+  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 8)
 
-  traffic = [
-    // Multiple layers of traffic cars for training AI
-    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * lane_start, standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * lane_start, standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - standardHeight * lane_start, standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - standardHeight * (lane_start + 2 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 2 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 3 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 3 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 4 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 4 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 5 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 5 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 6 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 6 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 7 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[0]]), -self_driving_cars[0].y - standardHeight * (lane_start + 7 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 8 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 8 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 8 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 9 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 9 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 10 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[4]]), -self_driving_cars[0].y - standardHeight * (lane_start + 10 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[2]]), -self_driving_cars[0].y - standardHeight * (lane_start + 11 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 11 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[1]]), -self_driving_cars[0].y - standardHeight * (lane_start + 9 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
-    // new Car(road.getLaneCenter(laneCodes[laneNames[3]]), -self_driving_cars[0].y - standardHeight * (lane_start + 10 * lane_factor), standardWidth, standardHeight, "TRAFFIC"),
+  playerCars = [car,car1,car2]
+  let lane_start = 2;
+  let lane_factor = 3;
 
+  let lanePattern = [
+    [1, 0],
+    [2, 4, 1],
+    [0, 3],
+    [1, 2],
+    [4, 2],
+    [1, 4],
+    [3, 1],
+    [1, 0],
+    [1, 2],
+    [1, 3],
+    [2, 4],
+    [2, 3],
+    [1, 3]
   ];
+
+  traffic = [];
+
+  for (let i = 0; i < lanePattern.length; i++) {
+    let y = -self_driving_cars[0].y - standardHeight * (lane_start + i * lane_factor);
+
+    for (let j = 0; j < lanePattern[i].length; j++) {
+      let laneIndex = lanePattern[i][j];
+      let x = road.getLaneCenter(laneCodes[laneNames[laneIndex]]);
+      traffic.push(new Car(x, y, standardWidth, standardHeight, "TRAFFIC"));
+    }
+  }
+
 }
 
 
