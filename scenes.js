@@ -33,10 +33,19 @@ function scene2(){
   // Car 1 button
   stroke(0)
   fill(255)
+  if(godMode == 1){
+    // Car 1 button
+    button(windowWidth * 0.05,windowHeight * 0.3,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,1)
+    fill(255)
+    // Car 2 button
+    button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
+  }else{
+  // Car 1 button
   button(windowWidth * 0.05,windowHeight * 0.3,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,1)
   fill(255)
   // Car 2 button
   button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
+  }
 }// end of scene2
 
 function scene3(){
@@ -72,7 +81,7 @@ function endScreen(){
 
 
 function trafficSim(){
-  // background(124,252,0)
+  background(0,140,0)
   let playerCar = playerCars[whichCar]
   score = floor(scoreCalc(-playerCar.y,0.01))
   for(let i = 0; i < traffic.length ; i++){
@@ -86,8 +95,10 @@ function trafficSim(){
   translate(0, -playerCar.y + windowHeight * 0.7);
   
   for(let i = 0; i < traffic.length; i++){
-    traffic[i].draw('blue');
+    traffic[i].draw(color_names[i % color_names.length])
   }// end of for
+  
+  
   if(whichCar == 1){
     playerCar.draw('red')
 
@@ -132,30 +143,36 @@ function AITest(){
   translate(0, -bestCar.y + windowHeight * 0.7);
 
   for(let i = 0; i < traffic.length; i++){
-    traffic[i].draw('blue');
+    traffic[i].draw(color_names[i % color_names.length])
   }// end of for
 
-  for(let i = 0; i < self_driving_cars.length; i++){
+  // for(let i = 0; i < self_driving_cars.length; i++){
     
-    if(self_driving_cars[i]!= bestCar){
-      self_driving_cars[i].draw('blue');
+  //   if(self_driving_cars[i]!= bestCar){
+  //     self_driving_cars[i].draw('blue');
           
-    }// end of if
-    if(!self_driving_cars[i].damaged){
-      self_driving_cars[i].draw('dead');
-    }// end of if
+  //   }// end of if
+  //   if(!self_driving_cars[i].damaged){
+  //     self_driving_cars[i].draw('dead');
+  //   }// end of if
 
-    // if(self_driving_cars[i].damaged && self_driving_cars[i]!= bestCar){
-    //   self_driving_cars[i].x = bestCar.x
-    //   self_driving_cars[i].y = bestCar.y * 0.99
-    //   self_driving_cars[i].brain = bestCar.brain
-    //   Network.mutate(self_driving_cars[i].brain,0.2)
-    //   self_driving_cars[i].damaged = false
-    // }
+  //   // if(self_driving_cars[i].damaged && self_driving_cars[i]!= bestCar){
+  //   //   self_driving_cars[i].x = bestCar.x
+  //   //   self_driving_cars[i].y = bestCar.y * 0.99
+  //   //   self_driving_cars[i].brain = bestCar.brain
+  //   //   Network.mutate(self_driving_cars[i].brain,0.2)
+  //   //   self_driving_cars[i].damaged = false
+  //   // }
 
-  }// end of for
+  // }// end of for
+  if(whichCar == 1){
+    bestCar.draw('red', true);
+  }
+  if(whichCar == 2){
+    bestCar.draw('gray', true);
 
-  bestCar.draw('red', true);
+  }
+
 
   pop();
   // if(bestCar.damaged){

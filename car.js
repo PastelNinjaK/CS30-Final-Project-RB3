@@ -179,22 +179,37 @@ class Car {
     let car_pic = this.carImageArr[0]
 
     switch(colour){
+      case 'blue':
+        car_pic = this.carImageArr[0]  
+        break;
       case 'red':
       car_pic = this.carImageArr[1]  
         break;
       case 'gray':
         car_pic = this.carImageArr[2]  
         break;
-      case 'blue':
-        car_pic = this.carImageArr[0]  
+      case 'black':
+        car_pic = this.carImageArr[3]
         break;
+      case 'green':
+        car_pic = this.carImageArr[4]
+        break;          
+      case 'orange':
+        car_pic = this.carImageArr[5]
+        break;
+      case 'purple':
+        car_pic = this.carImageArr[6]
+        break;
+
+      case 'white':
+        car_pic = this.carImageArr[7]
+        break;
+      case 'yellow':
+        car_pic = this.carImageArr[8]
+        break;
+
     }// end of switch
-    // beginShape();
-    // // stroke(0);
-    // for (let pt of this.polygon) {
-    //   vertex(pt.x, pt.y);
-    // }// end of for
-    // endShape(CLOSE);
+
 
 
     push();
@@ -202,10 +217,10 @@ class Car {
     rotate(-this.angle)
     image(car_pic,-this.width/2,-this.height/2, this.width,this.height)
     pop();
-    
-    if(this.sensor && drawSensor){
-      this.sensor.draw();
-    }// end of if
+    // // for testing AI only
+    // if(this.sensor && drawSensor){
+    //   this.sensor.draw();
+    // }// end of if
   
   }// end of draw
   
