@@ -46,6 +46,7 @@ function scene2(){
   // Car 2 button
   button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
   }
+  image(red_car_pic,windowWidth * 0.7, windowHeight * 0.2,windowWidth * 0.1, windowHeight * 0.4)
 }// end of scene2
 
 function scene3(){
@@ -79,11 +80,20 @@ function endScreen(){
  
 }
 
-
+function instructions(){
+  background(255)
+  button(windowWidth * 0.2, windowHeight * 0.1, windowWidth * 0.05, windowHeight * 0.1,4,2)
+  
+  
+}
 function trafficSim(){
-  background(0,140,0)
   let playerCar = playerCars[whichCar]
-  score = floor(scoreCalc(-playerCar.y,0.01))
+  fill(255,0,0)
+  stroke(0)
+  strokeWeight(10)
+  button(windowWidth * 0.8, windowHeight * 0.1, windowWidth * 0.1, windowHeight * 0.1,2,4)
+  noStroke();
+  score = floor(scoreCalc(-playerCar.y,0.1))
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
   }//end of for  
@@ -207,18 +217,7 @@ function reset(){
     [1, 3]
   ];
 
-  traffic = [];
-
-  for (let i = 0; i < lanePattern.length; i++) {
-    let y = -self_driving_cars[0].y - standardHeight * (lane_start + i * lane_factor);
-
-    for (let j = 0; j < lanePattern[i].length; j++) {
-      let laneIndex = lanePattern[i][j];
-      let x = road.getLaneCenter(laneCodes[laneNames[laneIndex]]);
-      traffic.push(new Car(x, y, standardWidth, standardHeight, "TRAFFIC"));
-    }
-  }
-
+traffic = makeTraffic(lanePattern,lane_start,lane_factor);
 }
 
 

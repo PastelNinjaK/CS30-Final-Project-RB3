@@ -40,18 +40,9 @@ class Car {
           this.controls.left = outputs[1]
           this.controls.right = outputs[2]
           this.controls.reverse = outputs[3]
-
-          // this.controls.forward = 1
-          // this.controls.left = outputs[1]
-          // this.controls.right = outputs[2]
-          // this.controls.reverse = 0
-        }
-        // print(outputs)
-        
+        }// end of if        
       }// end of if
-
     }// end of if
-
   }//end of update
 
 

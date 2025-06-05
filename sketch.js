@@ -80,6 +80,7 @@ let purple_car_pic;
 
 let car_pics;
 let color_names;
+let hasGodMode = false;
 
 
 function preload() {
@@ -145,17 +146,17 @@ function setup() {
   [1, 3]
 ];
 
-traffic = [];
+traffic = makeTraffic(lanePattern,lane_start,lane_factor);
 
-for (let i = 0; i < lanePattern.length; i++) {
-  let y = -self_driving_cars[0].y - proportionalLength * (lane_start + i * lane_factor);
+// for (let i = 0; i < lanePattern.length; i++) {
+//   let y = -self_driving_cars[0].y - proportionalLength * (lane_start + i * lane_factor);
 
-  for (let j = 0; j < lanePattern[i].length; j++) {
-    let laneIndex = lanePattern[i][j];
-    let x = road.getLaneCenter(laneCodes[laneNames[laneIndex]]);
-    traffic.push(new Car(x, y, proportionalWidth, proportionalLength, "TRAFFIC"));
-  }
-}
+//   for (let j = 0; j < lanePattern[i].length; j++) {
+//     let laneIndex = lanePattern[i][j];
+//     let x = road.getLaneCenter(laneCodes[laneNames[laneIndex]]);
+//     traffic.push(new Car(x, y, proportionalWidth, proportionalLength, "TRAFFIC"));
+//   }
+// }
   playerCars = [car,car1,car2]
 
     bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));
@@ -183,41 +184,21 @@ function draw() {
     scene2();
   }
   if (scenenum == 2){
+    background(0,140,0)
+
     scene3();
   }// end of if
   if (scenenum == 3) {
     endScreen();
     reset();
   }// end of if
-  // scene2();
+  if(scenenum == 4){
+    instructions();
+  }
 }// end of draw
 
-function keyPressed() {
-  for (let i = 0; i < playerCars.length; i++) {
-    playerCars[i].controls.handleKeyPress(key, true);
-  }// end of for
-  if (key === "o" || key === "O") {
-    saveBestBrain();
-  }// end of if
-  if (key === "i" || key === "I") {
-    discardBestBrain();
-  }// end of if
 
-  if(key == "p"){
-    print(localStorage)
-  }// end of if
 
-  if(key == 't'){
-    print(scenenum)
-  }
-  if(key == 'r'){
-    print(whichCar)
-  }
-}
 
-function keyReleased() {
-  for (let i = 0; i < playerCars.length; i++) {
-    playerCars[i].controls.handleKeyPress(key, false);
-  }
-}
+
 
