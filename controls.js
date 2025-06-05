@@ -44,19 +44,19 @@ class Controls {
     }
     if(this.controlType == 2){
       switch (k) {
-        case "ARROW_LEFT":
+        case "j":
             this.left = pressed;
             break;
-        case "ARROW_RIGHT":
+        case "l":
             this.right = pressed;
             break;
-        case "ARROW_UP":
+        case "i":
             this.forward = pressed;
             break;
-        case "ARROW_DOWN":
+        case "k":
             this.reverse = pressed;
             break;
-        case "SPACE":
+        case "b":
             this.boost = pressed;
             break;
       }

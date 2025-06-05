@@ -48,8 +48,6 @@ function polyIntersect(poly1,poly2){
 
 
 
-
-
 function saveBestBrain() {
   if (bestCar?.brain) {
     localStorage.setItem("myNeuralNetData", JSON.stringify(bestCar.brain));
@@ -65,7 +63,7 @@ function discardBestBrain() {
 function makeCars(num, x, y, w, h) {
   let car_arr = [];
   for (let i = 0; i < num; i++) {
-    car_arr.push(new Car(x, y, w, h, "AI", 8));
+    car_arr.push(new Car(x, y, w, h, "AI",false, 8));
   }// end of for
   return car_arr;
 }// end of makeCars
@@ -95,9 +93,11 @@ function keyPressed() {
   if (key === "o" || key === "O") {
     saveBestBrain();
   }// end of if
-  if (key === "i" || key === "I") {
+
+  if(key === '5' && godMode == 1){
     discardBestBrain();
-  }// end of if
+  }
+
 
   if(key == "p"){
     print(localStorage)
@@ -107,7 +107,7 @@ function keyPressed() {
     print(scenenum)
   }
   if(key == 'r'){
-    print(whichCar)
+    print(playerControl)
   }
 }
 

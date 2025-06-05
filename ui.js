@@ -32,3 +32,19 @@ function button(x,y,w,h,minScene,num,admin = 0,isCarButton = false,carnum){
     }// end of if
   }// end of if
 }// end of button
+
+
+function controlButton(x,y,w,h,type){
+  rect(x,y,w,h,10);
+  fill(0);
+  if(mouseIsPressed){
+      let x1 = (mouseX <= x+w);
+      let x2 = (mouseX >= x);
+      let y1 = (mouseY <= y+h);
+      let y2 = (mouseY >= y);
+      
+      if(x1 && x2 && y1 && y2){
+        playerControl = type
+      }// end of if
+  }// end of if
+}// end of button

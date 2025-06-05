@@ -1,10 +1,11 @@
 class Car {
-  constructor(x, y, width, height,type = "TRAFFIC", maxSpeed = 6) {
+  constructor(x, y, width, height,type = "TRAFFIC", controlType = 1,maxSpeed = 6) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.type = type;
+    this.controlType = controlType;
 
     this.speed = 0;
     this.acceleration = 0.2;
@@ -20,7 +21,7 @@ class Car {
       this.brain = new Network(
         [this.sensor.rayCount,6,4]);
     }
-    this.controls = new Controls(this.type);
+    this.controls = new Controls(this.type,this.controlType);
     this.carImageArr =  car_pics;
   }// end of constructor
 

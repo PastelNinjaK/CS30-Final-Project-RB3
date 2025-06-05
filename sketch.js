@@ -81,6 +81,7 @@ let purple_car_pic;
 let car_pics;
 let color_names;
 let hasGodMode = false;
+let playerControl = 1;
 
 
 function preload() {
@@ -111,7 +112,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // localStorage.setItem("myNeuralNetData", JSON.stringify(data));
+  localStorage.setItem("myNeuralNetData", JSON.stringify(data));
 
   let roadX = windowWidth / 2;
   let roadWidth = windowWidth * 0.9;
@@ -124,9 +125,9 @@ function setup() {
 
   let num = 1;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 10)
-  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 9)
-  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER", 8)
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 10)
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 9)
+  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 8)
 
 
 
@@ -148,15 +149,7 @@ function setup() {
 
 traffic = makeTraffic(lanePattern,lane_start,lane_factor);
 
-// for (let i = 0; i < lanePattern.length; i++) {
-//   let y = -self_driving_cars[0].y - proportionalLength * (lane_start + i * lane_factor);
 
-//   for (let j = 0; j < lanePattern[i].length; j++) {
-//     let laneIndex = lanePattern[i][j];
-//     let x = road.getLaneCenter(laneCodes[laneNames[laneIndex]]);
-//     traffic.push(new Car(x, y, proportionalWidth, proportionalLength, "TRAFFIC"));
-//   }
-// }
   playerCars = [car,car1,car2]
 
     bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));

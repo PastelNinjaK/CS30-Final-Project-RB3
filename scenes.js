@@ -83,6 +83,8 @@ function endScreen(){
 function instructions(){
   background(255)
   button(windowWidth * 0.2, windowHeight * 0.1, windowWidth * 0.05, windowHeight * 0.1,4,2)
+  controlButton(windowWidth * 0.2, windowHeight * 0.5,windowWidth * 0.05,windowHeight * 0.1,2) 
+  
   
   
 }
@@ -93,7 +95,7 @@ function trafficSim(){
   strokeWeight(10)
   button(windowWidth * 0.8, windowHeight * 0.1, windowWidth * 0.1, windowHeight * 0.1,2,4)
   noStroke();
-  score = floor(scoreCalc(-playerCar.y,0.1))
+  score = floor(scoreCalc(-playerCar.y,0.01))
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
   }//end of for  
@@ -101,7 +103,8 @@ function trafficSim(){
   scoreboard.draw(score)
   playerCar.update(road.borders,traffic)
   push();
-
+  playerCar.controlType = playerControl;
+  
   translate(0, -playerCar.y + windowHeight * 0.7);
   
   for(let i = 0; i < traffic.length; i++){
