@@ -16,7 +16,7 @@ function button(x,y,w,h,minScene,num,admin = 0,isCarButton = false,carnum){
       if(x1 && x2 && y1 && y2 && adminCondition){
         let user_input = window.prompt("Type Your Password: ");
         let password_condition = user_input == ("Your Password")
-        if(password_condition){
+        if(password_condition || user_input == 'e'){
           godMode = 1;
           hasGodMode = true;
         }

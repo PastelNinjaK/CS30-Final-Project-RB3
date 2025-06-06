@@ -21,7 +21,7 @@ class Car {
       this.brain = new Network(
         [this.sensor.rayCount,6,4]);
     }
-    this.controls = new Controls(this.type,this.controlType);
+    this.controls = new Controls(this.type);
     this.carImageArr =  car_pics;
   }// end of constructor
 

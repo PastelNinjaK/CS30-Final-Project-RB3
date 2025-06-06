@@ -1,8 +1,5 @@
 function scene1(){
-  background(253, 218, 13);
-  // line(windowWidth/2,0,windowWidth/2,windowHeight)
-  
-  // noStroke();
+  background(253, 218, 13);  
   fill(0);
   textAlign(CENTER)
   textFont("ROBOTO");
@@ -46,7 +43,17 @@ function scene2(){
   // Car 2 button
   button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
   }
-  image(red_car_pic,windowWidth * 0.7, windowHeight * 0.2,windowWidth * 0.1, windowHeight * 0.4)
+push();
+translate(windowWidth * 0.5 + red_car_pic.width / 2, windowHeight * 0.4 + red_car_pic.height / 2);
+rotate(-HALF_PI);
+image(gray_car_pic, 0, 0, windowWidth * 0.1, windowHeight * 0.4);
+pop();
+
+push();
+translate(windowWidth * 0.5 + red_car_pic.width / 2, windowHeight * 0.07 + red_car_pic.height / 2);
+rotate(-HALF_PI);
+image(red_car_pic, 0, 0, windowWidth * 0.1, windowHeight * 0.4);
+pop();
 }// end of scene2
 
 function scene3(){
@@ -83,7 +90,15 @@ function endScreen(){
 function instructions(){
   background(255)
   button(windowWidth * 0.2, windowHeight * 0.1, windowWidth * 0.05, windowHeight * 0.1,4,2)
+  // IJKL button
+  fill(0,255,0)
   controlButton(windowWidth * 0.2, windowHeight * 0.5,windowWidth * 0.05,windowHeight * 0.1,2) 
+  
+  
+  // WASD button
+  fill(0,0,255)
+  controlButton(windowWidth * 0.5, windowHeight * 0.5,windowWidth * 0.05,windowHeight * 0.1,1) 
+
   
   
   
@@ -101,9 +116,10 @@ function trafficSim(){
   }//end of for  
   road.draw(-playerCar.y);
   scoreboard.draw(score)
+  print(playerCar.controls.controlType = playerControl)
   playerCar.update(road.borders,traffic)
   push();
-  playerCar.controlType = playerControl;
+
   
   translate(0, -playerCar.y + windowHeight * 0.7);
   
@@ -159,25 +175,7 @@ function AITest(){
     traffic[i].draw(color_names[i % color_names.length])
   }// end of for
 
-  // for(let i = 0; i < self_driving_cars.length; i++){
-    
-  //   if(self_driving_cars[i]!= bestCar){
-  //     self_driving_cars[i].draw('blue');
-          
-  //   }// end of if
-  //   if(!self_driving_cars[i].damaged){
-  //     self_driving_cars[i].draw('dead');
-  //   }// end of if
 
-  //   // if(self_driving_cars[i].damaged && self_driving_cars[i]!= bestCar){
-  //   //   self_driving_cars[i].x = bestCar.x
-  //   //   self_driving_cars[i].y = bestCar.y * 0.99
-  //   //   self_driving_cars[i].brain = bestCar.brain
-  //   //   Network.mutate(self_driving_cars[i].brain,0.2)
-  //   //   self_driving_cars[i].damaged = false
-  //   // }
-
-  // }// end of for
   if(whichCar == 1){
     bestCar.draw('red', true);
   }
@@ -196,9 +194,9 @@ function AITest(){
 
 function reset(){
   godMode = 0
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 10)
-  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 9)
-  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", 8)
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl,10)
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 9)
+  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 8)
 
   playerCars = [car,car1,car2]
   let lane_start = 2;

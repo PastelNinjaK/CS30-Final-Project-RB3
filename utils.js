@@ -90,25 +90,14 @@ function keyPressed() {
   for (let i = 0; i < playerCars.length; i++) {
     playerCars[i].controls.handleKeyPress(key, true);
   }// end of for
-  if (key === "o" || key === "O") {
-    saveBestBrain();
-  }// end of if
+  // if (key === "o" || key === "O") {
+  //   saveBestBrain();
+  // }// end of if
 
-  if(key === '5' && godMode == 1){
-    discardBestBrain();
-  }
+  // if(key === '5' && godMode == 1){
+  //   discardBestBrain();
+  // }
 
-
-  if(key == "p"){
-    print(localStorage)
-  }// end of if
-
-  if(key == 't'){
-    print(scenenum)
-  }
-  if(key == 'r'){
-    print(playerControl)
-  }
 }
 
 function keyReleased() {

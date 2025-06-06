@@ -1,13 +1,13 @@
 // Controls class using p5.js keyboard events
 class Controls {
-  constructor(type,controlType = 1) {
+  constructor(type) {
     this.forward = true;
     this.forward = false;
     this.left = false;
     this.right = false;
     this.reverse = false;
     this.boost = false;
-    this.controlType = controlType;
+    this.controlType = 1;
     switch(type){
       case "TRAFFIC" || "AI":
         this.forward = true;
@@ -16,11 +16,10 @@ class Controls {
         this.forward = false;
         break;  
     }// end of switch
-
   }// end of constructor
 
   handleKeyPress(k, pressed) {
-    if(this.controlType == 1){
+    if(this.controlType === 1){
 
       switch (k) {
         case "a":
@@ -41,8 +40,7 @@ class Controls {
 
 
       }// end of switch
-    }
-    if(this.controlType == 2){
+    }else if(this.controlType === 2){
       switch (k) {
         case "j":
             this.left = pressed;
