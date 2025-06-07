@@ -1,62 +1,4 @@
-function scene1(){
-  background(253, 218, 13);  
-  fill(0);
-  textAlign(CENTER)
-  textFont("ROBOTO");
-  fill(0)
-  image(title_pic,windowWidth * 0.2775,-windowHeight * 0.1,windowWidth * 0.457)
-  // Normal Button
-  fill(128, 128, 128)
-  stroke(0)
-  button(windowWidth * 0.3,windowHeight * 0.4,windowWidth * 0.4,windowHeight*0.2,0,1)
-  strokeWeight(20)
-  textSize(35)
-  fill(128, 128, 128)
-  // God Mode Button
-  button(windowWidth * 0.3,windowHeight * 0.7,windowWidth * 0.4,windowHeight*0.2,0,1,1)
-  fill(0)
-  textSize(35)
-  noStroke()
-  text("Normal Mode",windowWidth * 0.5,windowHeight * 0.5)
-  text("God Mode",windowWidth * 0.5,windowHeight * 0.8)
-}// end of scene1
-
-
-
-
-function scene2(){
-  background(253, 218, 13);
-  
-  // Car 1 button
-  stroke(0)
-  fill(255)
-  if(godMode == 1){
-    // Car 1 button
-    button(windowWidth * 0.05,windowHeight * 0.3,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,1)
-    fill(255)
-    // Car 2 button
-    button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
-  }else{
-  // Car 1 button
-  button(windowWidth * 0.05,windowHeight * 0.3,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,1)
-  fill(255)
-  // Car 2 button
-  button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
-  }
-push();
-translate(windowWidth * 0.5 + red_car_pic.width / 2, windowHeight * 0.4 + red_car_pic.height / 2);
-rotate(-HALF_PI);
-image(gray_car_pic, 0, 0, windowWidth * 0.1, windowHeight * 0.4);
-pop();
-
-push();
-translate(windowWidth * 0.5 + red_car_pic.width / 2, windowHeight * 0.07 + red_car_pic.height / 2);
-rotate(-HALF_PI);
-image(red_car_pic, 0, 0, windowWidth * 0.1, windowHeight * 0.4);
-pop();
-}// end of scene2
-
-function scene3(){
+function mainGame(){
   if(godMode == 1){
     AITest();
   }else{
@@ -88,17 +30,64 @@ function endScreen(){
 }
 
 function instructions(){
-  background(255)
-  button(windowWidth * 0.2, windowHeight * 0.1, windowWidth * 0.05, windowHeight * 0.1,4,2)
-  // IJKL button
-  fill(0,255,0)
-  controlButton(windowWidth * 0.2, windowHeight * 0.5,windowWidth * 0.05,windowHeight * 0.1,2) 
+  noStroke()
+  let currentControl = ""
+  let forwardKey = ''
+  let reverseKey = ''
+  let rightKey = ''
+  let leftKey = ''
+  background(253, 218, 13);
   
+  
+  if(playerControl === 1){
+    currentControl = "WASD"
+    forwardKey = currentControl[0]
+    leftKey = currentControl[1]
+    reverseKey = currentControl[2]
+    rightKey = currentControl[3]
+  }
+  if(playerControl === 2){
+    currentControl = "IJKL"
+    forwardKey = currentControl[0]
+    leftKey = currentControl[1]
+    reverseKey = currentControl[2]
+    rightKey = currentControl[3]
+  }
+  if(playerControl === 3 ){
+    currentControl = "Arrow keys"
+    forwardKey = "UP"
+    leftKey = "LEFT"
+    reverseKey = "DOWN"
+    rightKey = "RIGHT"
+  }
+  textSize(20)
+  text(`Current Control Layout: ${currentControl}`,windowWidth * 0.1, windowHeight * 0.05)
+  text(`Key Binding`,windowWidth * 0.1,windowHeight * 0.12)
+  text(`Forward Key: ${forwardKey}`,windowWidth * 0.1, windowHeight * 0.17)
+  text(`Reverse Key: ${reverseKey}`,windowWidth * 0.1, windowHeight * 0.2)
+  text(`Left Key: ${leftKey}`,windowWidth * 0.1, windowHeight * 0.23)
+  text(`Right Key: ${rightKey}`,windowWidth * 0.1, windowHeight * 0.26)
+  
+  
+  // IJKL button
+  text("Switch to IJKL",windowWidth * 0.095,windowHeight * 0.65)
+  text("Switch to Arrow\nKeys",windowWidth * 0.195,windowHeight * 0.65)
+  text("Switch to AWSD",windowWidth * 0.295,windowHeight * 0.65)
+  stroke(0)
+  strokeWeight(10)
+  fill(255)
+  controlButton(windowWidth * 0.1, windowHeight * 0.7,windowWidth * 0.05,windowHeight * 0.1,2) 
+  
+  // Arrow button
+  fill(255)
+  controlButton(windowWidth * 0.2, windowHeight * 0.7,windowWidth * 0.05,windowHeight * 0.1,3) 
   
   // WASD button
-  fill(0,0,255)
-  controlButton(windowWidth * 0.5, windowHeight * 0.5,windowWidth * 0.05,windowHeight * 0.1,1) 
-
+  fill(255)
+  controlButton(windowWidth * 0.3, windowHeight * 0.7,windowWidth * 0.05,windowHeight * 0.1,1) 
+  // Return to Game button 
+  fill(255) 
+  button(windowWidth * 0.01, windowHeight * 0.05, windowWidth * 0.05, windowHeight * 0.1,4,2)
   
   
   
@@ -192,34 +181,7 @@ function AITest(){
 
 }// end of AITest
 
-function reset(){
-  godMode = 0
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl,10)
-  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 9)
-  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 8)
 
-  playerCars = [car,car1,car2]
-  let lane_start = 2;
-  let lane_factor = 3;
-
-  let lanePattern = [
-    [1, 0],
-    [2, 4, 1],
-    [0, 3],
-    [1, 2],
-    [4, 2],
-    [1, 4],
-    [3, 1],
-    [1, 0],
-    [1, 2],
-    [1, 3],
-    [2, 4],
-    [2, 3],
-    [1, 3]
-  ];
-
-traffic = makeTraffic(lanePattern,lane_start,lane_factor);
-}
 
 
 

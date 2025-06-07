@@ -105,3 +105,34 @@ function keyReleased() {
     playerCars[i].controls.handleKeyPress(key, false);
   }
 }
+
+
+
+function reset(){
+  godMode = 0
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl,10)
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 9)
+  car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 8)
+
+  playerCars = [car,car1,car2]
+  let lane_start = 2;
+  let lane_factor = 3;
+
+  let lanePattern = [
+    [1, 0],
+    [2, 4, 1],
+    [0, 3],
+    [1, 2],
+    [4, 2],
+    [1, 4],
+    [3, 1],
+    [1, 0],
+    [1, 2],
+    [1, 3],
+    [2, 4],
+    [2, 3],
+    [1, 3]
+  ];
+
+traffic = makeTraffic(lanePattern,lane_start,lane_factor);
+}

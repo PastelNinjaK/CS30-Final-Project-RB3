@@ -58,6 +58,24 @@ class Controls {
             this.boost = pressed;
             break;
       }
+    }else if(this.controlType === 3){
+      switch (k) {
+        case "ArrowLeft":
+            this.left = pressed;
+            break;
+        case "ArrowRight":
+            this.right = pressed;
+            break;
+        case "ArrowUp":
+            this.forward = pressed;
+            break;
+        case "ArrowDown":
+            this.reverse = pressed;
+            break;
+        case "b":
+            this.boost = pressed;
+            break;
+      }      
     }
     
 
