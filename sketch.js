@@ -82,19 +82,23 @@ let car_pics;
 let color_names;
 let hasGodMode = false;
 let playerControl = 1;
+let pause_img;
+let play_img;
 
 
 function preload() {
   title_pic = loadImage("images/title_image.png");
+  pause_img = loadImage("images/pause.png");
+  play_img = loadImage("images/play.png")
   gray_car_pic = loadImage("images/gray_car.png");
   blue_car_pic = loadImage("images/blue_car.png");
   red_car_pic = loadImage("images/red_car.png");
   black_car_pic = loadImage("images/black_car.png");
   green_car_pic = loadImage("images/green_car.png");
-  orange_car_pic = loadImage("images/orange_car.png")
-  purple_car_pic = loadImage("images/purple_car.png")
-  white_car_pic = loadImage("images/white_car.png")
-  yellow_car_pic = loadImage("images/yellow_car.png")
+  orange_car_pic = loadImage("images/orange_car.png");
+  purple_car_pic = loadImage("images/purple_car.png");
+  white_car_pic = loadImage("images/white_car.png");
+  yellow_car_pic = loadImage("images/yellow_car.png");
   color_names = ['blue','red','gray','yellow','purple','white','green','orange','black']
   
   car_pics = [

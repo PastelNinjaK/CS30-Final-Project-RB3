@@ -94,10 +94,11 @@ function instructions(){
 }
 function trafficSim(){
   let playerCar = playerCars[whichCar]
-  fill(255,0,0)
+  fill(255)
   stroke(0)
   strokeWeight(10)
-  button(windowWidth * 0.8, windowHeight * 0.1, windowWidth * 0.1, windowHeight * 0.1,2,4)
+  button(windowWidth * 0.8, windowHeight * 0.1, windowWidth * 0.05, windowHeight * 0.1,2,4)
+  image(pause_img,windowWidth * 0.805, windowHeight * 0.11,windowWidth * 0.04, windowHeight * 0.08)
   noStroke();
   score = floor(scoreCalc(-playerCar.y,0.01))
   for(let i = 0; i < traffic.length ; i++){
