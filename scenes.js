@@ -88,6 +88,7 @@ function instructions(){
   // Return to Game button 
   fill(255) 
   button(windowWidth * 0.01, windowHeight * 0.05, windowWidth * 0.05, windowHeight * 0.1,4,2)
+  image(play_img,windowWidth * 0.805, windowHeight * 0.11,windowWidth * 0.04, windowHeight * 0.08)
   
   
   
@@ -106,6 +107,7 @@ function trafficSim(){
   }//end of for  
   road.draw(-playerCar.y);
   scoreboard.draw(score)
+  recycleTraffic(playerCar,windowHeight,playerCar.width * (lane_factor * lane_start))
   print(playerCar.controls.controlType = playerControl)
   playerCar.update(road.borders,traffic)
   push();
@@ -151,8 +153,10 @@ function AITest(){
       bestCar = self_driving_cars[i];
     }// end of if
 
-  }// end of for
-  road.draw(-bestCar.y);
+}// end of for
+road.draw(-bestCar.y);
+recycleTraffic(bestCar,windowHeight,bestCar.width * (lane_factor * lane_start))
+  
   for(let i = 0; i < self_driving_cars.length; i++){
     self_driving_cars[i].update(road.borders, traffic);
   }// end of for
@@ -182,6 +186,27 @@ function AITest(){
 
 }// end of AITest
 
+
+
+
+
+function recycleTraffic(refCar,buffer,spacing) {
+  // vertical gap between traffic cars
+
+  // Find the highest (smallest y) traffic car
+  let topY = Math.min(...traffic.map(c => c.y));
+
+  for (let i = 0; i < traffic.length; i++) {
+    let car = traffic[i];
+    
+    // If car is far below the player
+    if (car.y > refCar.y + buffer) {
+      car.y = topY - spacing;
+
+      
+    }
+  }
+}
 
 
 

@@ -84,12 +84,27 @@ let hasGodMode = false;
 let playerControl = 1;
 let pause_img;
 let play_img;
+let lanePattern = [
+[1, 0],
+[2, 4, 1],
+[0, 3],
+[1, 2],
+[4, 2],
+[1, 4],
+[3, 1],
+[1, 0],
+[1, 2],
+[1, 3],
+[2, 4],
+[2, 3],
+[1, 3]
+];
 
 
 function preload() {
   title_pic = loadImage("images/title_image.png");
   pause_img = loadImage("images/pause.png");
-  play_img = loadImage("images/play.png")
+  play_img = loadImage("images/play.png");
   gray_car_pic = loadImage("images/gray_car.png");
   blue_car_pic = loadImage("images/blue_car.png");
   red_car_pic = loadImage("images/red_car.png");
@@ -135,21 +150,6 @@ function setup() {
 
 
 
-  let lanePattern = [
-  [1, 0],
-  [2, 4, 1],
-  [0, 3],
-  [1, 2],
-  [4, 2],
-  [1, 4],
-  [3, 1],
-  [1, 0],
-  [1, 2],
-  [1, 3],
-  [2, 4],
-  [2, 3],
-  [1, 3]
-];
 
 traffic = makeTraffic(lanePattern,lane_start,lane_factor);
 
