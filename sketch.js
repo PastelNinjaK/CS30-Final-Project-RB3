@@ -145,7 +145,7 @@ function setup() {
   let num = 1;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 14)
-  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 12)
+  car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 14)
   car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 13)
 
 
@@ -194,7 +194,7 @@ function draw() {
   if(scenenum == 5){
     AiInstructions();
   }// end of if
-  // carSelection();
+    // carSelection();
 
 
 

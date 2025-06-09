@@ -222,9 +222,9 @@ function AITest(){
 
 
   pop();
-  // if(bestCar.damaged){
-  //   scenenum++
-  // }// end of if
+  if(bestCar.damaged){
+    scenenum++
+  }// end of if
 
 }// end of AITest
 

@@ -69,4 +69,17 @@ function carSelection(){
     text("Welcome to God Mode", windowWidth * 0.4, windowHeight * 0.1)
     stroke(0)
   }
+  noStroke()
+  fill(0)
+  text('Press to pick Gray Car',windowWidth * 0.15,windowHeight * 0.66)
+  text('Press to pick Red Car',windowWidth * 0.15,windowHeight * 0.36)
+  
+  
+  text(`Top Speed: 91 km/h`, windowWidth * 0.4, windowHeight * 0.4)
+  text("Downforce/Grip: 8", windowWidth * 0.4, windowHeight * 0.45)
+  
+  text(`Top Speed: 84 km/h`, windowWidth * 0.4, windowHeight * 0.6)
+  text("Downforce/Grip: 10", windowWidth * 0.4, windowHeight * 0.65)  
+  stroke(0)
+
 }// end of scene2

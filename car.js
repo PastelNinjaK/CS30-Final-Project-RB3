@@ -10,6 +10,7 @@ class Car {
     this.speed = 0;
     this.acceleration = 0.2;
     this.maxSpeed = maxSpeed;
+    // only if you know the code or accidentaly press b :)
     this.maxBoostSpeed = this.maxSpeed * 2;
     this.friction = 0.05;
     this.angle = 0;
