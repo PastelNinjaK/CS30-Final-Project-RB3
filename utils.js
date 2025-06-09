@@ -110,6 +110,8 @@ function keyReleased() {
 
 function reset(){
   godMode = 0
+  self_driving_cars = makeCars(1, road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight);
+
   car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl,10)
   car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 9)
   car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 8)
@@ -134,5 +136,18 @@ function reset(){
     [1, 3]
   ];
 
-traffic = makeTraffic(lanePattern,lane_start,lane_factor);
+  traffic = makeTraffic(lanePattern,lane_start,lane_factor);
+
+  bestCar = self_driving_cars.find(c => c.y == Math.min(...self_driving_cars.map(c => c.y)));
+    // bestCar = self_driving_cars[0]
+    if (localStorage.getItem("myNeuralNetData")) {
+      let brainData = JSON.parse(localStorage.getItem("myNeuralNetData"));
+      for (let i = 0; i < self_driving_cars.length; i++) {
+        self_driving_cars[i].brain = JSON.parse(JSON.stringify(brainData));
+        if (i !== 0) {
+          Network.mutate(self_driving_cars[i].brain,0.2);
+        }// end of if
+      }// end of for
+    }// end of if
+
 }

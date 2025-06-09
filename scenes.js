@@ -73,6 +73,11 @@ function instructions(){
   text("Switch to IJKL",windowWidth * 0.095,windowHeight * 0.65)
   text("Switch to Arrow\nKeys",windowWidth * 0.195,windowHeight * 0.65)
   text("Switch to AWSD",windowWidth * 0.295,windowHeight * 0.65)
+  text("Welcome to TrafficSim!\nYour goal survive for as long as you can.",windowWidth * 0.7, windowHeight * 0.1)
+  text(`Your Current Score: ${score}`,windowWidth * 0.7, windowHeight * 0.2)
+  text("Quit Button",windowWidth * 0.7, windowHeight * 0.45)
+  text("Conitnue Button",windowWidth * 0.01, windowHeight * 0.2)
+
   stroke(0)
   strokeWeight(10)
   fill(255)
@@ -88,11 +93,37 @@ function instructions(){
   // Return to Game button 
   fill(255) 
   button(windowWidth * 0.01, windowHeight * 0.05, windowWidth * 0.05, windowHeight * 0.1,4,2)
-  image(play_img,windowWidth * 0.805, windowHeight * 0.11,windowWidth * 0.04, windowHeight * 0.08)
-  
+  image(play_img,windowWidth * 0.015, windowHeight * 0.06,windowWidth * 0.04, windowHeight * 0.08)
+  // Quit button
+  fill(255)
+  button(windowWidth * 0.7, windowHeight * 0.5, windowWidth * 0.05, windowHeight * 0.1,4,3)
+
   
   
 }
+
+
+
+function AiInstructions(){
+  background(253, 218, 13);
+  textSize(20)
+  noStroke()
+  text("Welcome to TrafficSim(GOD mode)!\nYour goal:\nChill and just watch my AI trained Navigate through traffic!.",windowWidth * 0.7, windowHeight * 0.1)
+  text(`Your Current Score: ${score}`,windowWidth * 0.7, windowHeight * 0.2)
+  text("Quit Button",windowWidth * 0.7, windowHeight * 0.45)
+  text("Conitnue Button",windowWidth * 0.01, windowHeight * 0.2)
+  // Return to Game button 
+  button(windowWidth * 0.01, windowHeight * 0.05, windowWidth * 0.05, windowHeight * 0.1,5,2)
+  image(play_img,windowWidth * 0.015, windowHeight * 0.06,windowWidth * 0.04, windowHeight * 0.08)
+  // Quit Button
+  stroke(0)
+  fill(255)
+  button(windowWidth * 0.7, windowHeight * 0.5, windowWidth * 0.05, windowHeight * 0.1,5,3)  
+
+}
+
+
+
 function trafficSim(){
   let playerCar = playerCars[whichCar]
   fill(255)
@@ -140,6 +171,12 @@ function trafficSim(){
 
 
 function AITest(){
+  fill(255)
+  stroke(0)
+  strokeWeight(10)
+  button(windowWidth * 0.8, windowHeight * 0.1, windowWidth * 0.05, windowHeight * 0.1,2,5)
+  image(pause_img,windowWidth * 0.805, windowHeight * 0.11,windowWidth * 0.04, windowHeight * 0.08)
+  noStroke();
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
   }// end of for
@@ -153,10 +190,10 @@ function AITest(){
       bestCar = self_driving_cars[i];
     }// end of if
 
-}// end of for
-road.draw(-bestCar.y);
-recycleTraffic(bestCar,windowHeight,bestCar.width * (lane_factor * lane_start))
-  
+  }// end of for
+  road.draw(-bestCar.y);
+  recycleTraffic(bestCar,windowHeight,bestCar.width * (lane_factor * lane_start))
+    
   for(let i = 0; i < self_driving_cars.length; i++){
     self_driving_cars[i].update(road.borders, traffic);
   }// end of for
@@ -191,7 +228,6 @@ recycleTraffic(bestCar,windowHeight,bestCar.width * (lane_factor * lane_start))
 
 
 function recycleTraffic(refCar,buffer,spacing) {
-  // vertical gap between traffic cars
 
   // Find the highest (smallest y) traffic car
   let topY = Math.min(...traffic.map(c => c.y));
@@ -207,6 +243,8 @@ function recycleTraffic(refCar,buffer,spacing) {
     }
   }
 }
+
+
 
 
 

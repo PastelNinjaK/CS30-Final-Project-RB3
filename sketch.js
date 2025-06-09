@@ -63,7 +63,7 @@ let data = {
       ]
     }
   ]
-};
+};// Car brain for AI
 
 let score = 0;
 let standardWidth;
@@ -179,10 +179,9 @@ function draw() {
   }// end of if
   if (scenenum == 1){
     carSelection();
-  }
+  }// end of if
   if (scenenum == 2){
     background(0,140,0)
-
     mainGame();
   }// end of if
   if (scenenum == 3) {
@@ -191,8 +190,13 @@ function draw() {
   }// end of if
   if(scenenum == 4){
     instructions();
-  }
+  }// end of if
+  if(scenenum == 5){
+    AiInstructions();
+  }// end of if
   // instructions();
+  // AiInstructions();
+
 }// end of draw
 
 
