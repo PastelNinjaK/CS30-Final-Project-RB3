@@ -138,6 +138,7 @@ function trafficSim(){
   }//end of for  
   road.draw(-playerCar.y);
   scoreboard.draw(score)
+  text(`Speed: ${floor(playerCar.speed) * 7 }`,windowWidth * 0.85, windowHeight * 0.5)
   recycleTraffic(playerCar,windowHeight,playerCar.width * (lane_factor * lane_start))
   print(playerCar.controls.controlType = playerControl)
   playerCar.update(road.borders,traffic)
@@ -192,6 +193,10 @@ function AITest(){
 
   }// end of for
   road.draw(-bestCar.y);
+  noStroke()
+  fill(0)
+  text(`Speed: ${floor(bestCar.speed) * 7 }`,windowWidth * 0.85, windowHeight * 0.5)
+  stroke(0)
   recycleTraffic(bestCar,windowHeight,bestCar.width * (lane_factor * lane_start))
     
   for(let i = 0; i < self_driving_cars.length; i++){

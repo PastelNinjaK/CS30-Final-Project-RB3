@@ -53,4 +53,20 @@ function carSelection(){
   rotate(-HALF_PI);
   image(red_car_pic, 0, 0, windowWidth * 0.1, windowHeight * 0.4);
   pop();
+  if(hasGodMode == false){
+    fill(255)
+    rect(windowWidth * 0.3,windowHeight * 0.045,windowWidth * 0.2,windowHeight*0.1,5)
+    noStroke()
+    fill(0)
+    text("Access Denied!", windowWidth * 0.4, windowHeight * 0.1)
+    stroke(0)
+  }
+  if(godMode == 1){
+    fill(255)
+    rect(windowWidth * 0.3,windowHeight * 0.045,windowWidth * 0.2,windowHeight*0.1,5)
+    noStroke()
+    fill(0)
+    text("Welcome to God Mode", windowWidth * 0.4, windowHeight * 0.1)
+    stroke(0)
+  }
 }// end of scene2

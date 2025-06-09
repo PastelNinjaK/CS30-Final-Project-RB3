@@ -80,7 +80,7 @@ let purple_car_pic;
 
 let car_pics;
 let color_names;
-let hasGodMode = false;
+let hasGodMode;
 let playerControl = 1;
 let pause_img;
 let play_img;
@@ -194,8 +194,9 @@ function draw() {
   if(scenenum == 5){
     AiInstructions();
   }// end of if
-  // instructions();
-  // AiInstructions();
+  // carSelection();
+
+
 
 }// end of draw
 
