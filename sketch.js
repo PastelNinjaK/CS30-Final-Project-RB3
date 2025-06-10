@@ -77,6 +77,9 @@ let yellow_car_pic;
 let white_car_pic;
 let orange_car_pic;
 let purple_car_pic;
+let startUp_pic;
+
+let scene2_pic;
 
 let car_pics;
 let color_names;
@@ -102,7 +105,9 @@ let lanePattern = [
 
 
 function preload() {
-  title_pic = loadImage("images/title_image.png");
+  // title_pic = loadImage("images/title_image.png");
+  startUp_pic = loadImage("images/startUp.png")
+  scene2_pic = loadImage("images/scene2.png")
   pause_img = loadImage("images/pause.png");
   play_img = loadImage("images/play.png");
   gray_car_pic = loadImage("images/gray_car.png");
@@ -151,7 +156,7 @@ function setup() {
 
 
 
-traffic = makeTraffic(lanePattern,lane_start,lane_factor);
+  traffic = makeTraffic(lanePattern,lane_start,lane_factor);
 
 
   playerCars = [car,car1,car2]

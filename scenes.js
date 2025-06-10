@@ -14,7 +14,7 @@ function endScreen(){
   stroke(0)
   strokeWeight(3)
   rect(windowWidth * 0.3,windowHeight * 0.5, windowWidth  * 0.4, windowHeight * 0.2,5)
-  textFont("ROBOTO")
+  textFont("IMPACT")
   // Restart Button 
   button(windowWidth * 0.3,windowHeight * 0.1, windowWidth  * 0.4, windowHeight * 0.1,3,0)
 
@@ -105,6 +105,7 @@ function instructions(){
 
 
 function AiInstructions(){
+  textFont("IMPACT")
   background(253, 218, 13);
   textSize(20)
   noStroke()
@@ -138,7 +139,7 @@ function trafficSim(){
   }//end of for  
   road.draw(-playerCar.y);
   scoreboard.draw(score)
-  text(`Speed: ${floor(playerCar.speed) * 7 }`,windowWidth * 0.85, windowHeight * 0.5)
+  text(`Speed: ${floor(playerCar.speed) * 7 }km/h`,windowWidth * 0.85, windowHeight * 0.5)
   recycleTraffic(playerCar,windowHeight,playerCar.width * (lane_factor * lane_start))
   print(playerCar.controls.controlType = playerControl)
   playerCar.update(road.borders,traffic)
@@ -195,7 +196,7 @@ function AITest(){
   road.draw(-bestCar.y);
   noStroke()
   fill(0)
-  text(`Speed: ${floor(bestCar.speed) * 7 }`,windowWidth * 0.85, windowHeight * 0.5)
+  text(`Speed: ${floor(bestCar.speed) * 7 }km/h`,windowWidth * 0.85, windowHeight * 0.5)
   stroke(0)
   recycleTraffic(bestCar,windowHeight,bestCar.width * (lane_factor * lane_start))
     

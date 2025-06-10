@@ -2,9 +2,11 @@ function startingScreen(){
   background(253, 218, 13);  
   fill(0);
   textAlign(CENTER)
-  textFont("ROBOTO");
+  textFont("IMPACT");
   fill(0)
-  image(title_pic,windowWidth * 0.2775,-windowHeight * 0.1,windowWidth * 0.457)
+  // image(title_pic,windowWidth * 0.2775,-windowHeight * 0.1,windowWidth * 0.457)
+  
+  image(startUp_pic,0,0,windowWidth,windowHeight)
   // Normal Button
   fill(128, 128, 128)
   stroke(0)
@@ -24,7 +26,9 @@ function startingScreen(){
 
 
 function carSelection(){
+  textFont("IMPACT")
   background(253, 218, 13);
+  image(scene2_pic,0,0,windowWidth,windowHeight)
   
   // Car 1 button
   stroke(0)
