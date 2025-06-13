@@ -27,6 +27,7 @@ class Car {
   }// end of constructor
 
   update(roadBorders,traffic) {
+    // this deals with the movement of the car when it's in self-driving mode and collisions
     if(!this.damaged){
       this.move();
       this.polygon = this.createPolygon();
@@ -169,6 +170,7 @@ class Car {
 
 
   draw(colour,drawSensor = false) {
+    // this method deals with drawing/showing the car
     let car_pic = this.carImageArr[0]
 
     switch(colour){
@@ -199,6 +201,9 @@ class Car {
         break;
       case 'yellow':
         car_pic = this.carImageArr[8]
+        break;
+      case 'denny':
+        car_pic = denny_pic;
         break;
 
     }// end of switch

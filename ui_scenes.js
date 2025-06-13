@@ -40,11 +40,16 @@ function carSelection(){
     // Car 2 button
     button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
   }else{
+    // denny
+    fill(255)
+    button(windowWidth * 0.7,windowHeight * 0.3,windowWidth * 0.05,windowHeight*0.1,1,2,0,true,0)
     // Car 1 button
+    fill(255)
     button(windowWidth * 0.05,windowHeight * 0.3,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,1)
     fill(255)
     // Car 2 button
     button(windowWidth * 0.05,windowHeight * 0.6,windowWidth * 0.2,windowHeight*0.1,1,2,0,true,2)
+
   }
   push();
   translate(windowWidth * 0.5 + red_car_pic.width / 2, windowHeight * 0.4 + red_car_pic.height / 2);

@@ -36,9 +36,9 @@ function instructions(){
   let reverseKey = ''
   let rightKey = ''
   let leftKey = ''
-  background(253, 218, 13);
+  // background(253, 218, 13);
   
-  
+  image(instructions_pic,0,0,windowWidth,windowHeight)  
   if(playerControl === 1){
     currentControl = "WASD"
     forwardKey = currentControl[0]
@@ -61,6 +61,7 @@ function instructions(){
     rightKey = "RIGHT"
   }
   textSize(20)
+  fill(255)
   text(`Current Control Layout: ${currentControl}`,windowWidth * 0.1, windowHeight * 0.05)
   text(`Key Binding`,windowWidth * 0.1,windowHeight * 0.12)
   text(`Forward Key: ${forwardKey}`,windowWidth * 0.1, windowHeight * 0.17)
@@ -106,7 +107,8 @@ function instructions(){
 
 function AiInstructions(){
   textFont("IMPACT")
-  background(253, 218, 13);
+  image(instructions_pic,0,0,windowWidth,windowHeight)
+  fill(255)
   textSize(20)
   noStroke()
   text("Welcome to TrafficSim(GOD mode)!\nYour goal:\nChill and just watch my AI trained Navigate through traffic!.",windowWidth * 0.7, windowHeight * 0.1)
@@ -156,10 +158,12 @@ function trafficSim(){
   if(whichCar == 1){
     playerCar.draw('red')
 
-  }else if(whichCar == 2){
+  }
+  if(whichCar == 2){
     playerCar.draw('gray')
-  }else{
-    playerCar.draw('blue')
+  }
+  if(whichCar == 0){
+    playerCar.draw('denny')
 
   }
   pop()

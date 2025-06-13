@@ -90,14 +90,6 @@ function keyPressed() {
   for (let i = 0; i < playerCars.length; i++) {
     playerCars[i].controls.handleKeyPress(key, true);
   }// end of for
-  // if (key === "o" || key === "O") {
-  //   saveBestBrain();
-  // }// end of if
-
-  // if(key === '5' && godMode == 1){
-  //   discardBestBrain();
-  // }
-
 }
 
 function keyReleased() {

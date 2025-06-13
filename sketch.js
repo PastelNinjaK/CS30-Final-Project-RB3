@@ -78,8 +78,10 @@ let white_car_pic;
 let orange_car_pic;
 let purple_car_pic;
 let startUp_pic;
+let denny_pic;
 
 let scene2_pic;
+let instructions_pic;
 
 let car_pics;
 let color_names;
@@ -106,9 +108,11 @@ let lanePattern = [
 
 function preload() {
   // title_pic = loadImage("images/title_image.png");
-  startUp_pic = loadImage("images/startUp.png")
-  scene2_pic = loadImage("images/scene2.png")
+  denny_pic = loadImage("images/denny.png");
+  startUp_pic = loadImage("images/startUp.png");
+  scene2_pic = loadImage("images/scene2.png");
   pause_img = loadImage("images/pause.png");
+  instructions_pic = loadImage('images/instructions.png');
   play_img = loadImage("images/play.png");
   gray_car_pic = loadImage("images/gray_car.png");
   blue_car_pic = loadImage("images/blue_car.png");
@@ -149,7 +153,7 @@ function setup() {
 
   let num = 1;
   self_driving_cars = makeCars(num, road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength);
-  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 14)
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 20)
   car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 14)
   car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, proportionalWidth, proportionalLength, "PLAYER",playerControl, 13)
 
@@ -186,7 +190,7 @@ function draw() {
     carSelection();
   }// end of if
   if (scenenum == 2){
-    background(0,140,0)
+    background(49, 94, 19)
     mainGame();
   }// end of if
   if (scenenum == 3) {
