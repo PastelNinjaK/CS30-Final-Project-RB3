@@ -143,7 +143,6 @@ function trafficSim(){
   scoreboard.draw(score)
   text(`Speed: ${floor(playerCar.speed) * 7 }km/h`,windowWidth * 0.85, windowHeight * 0.5)
   recycleTraffic(playerCar,windowHeight,playerCar.width * (lane_factor * lane_start))
-  print(playerCar.controls.controlType = playerControl)
   playerCar.update(road.borders,traffic)
   push();
 
@@ -163,6 +162,7 @@ function trafficSim(){
     playerCar.draw('gray')
   }
   if(whichCar == 0){
+    // my secret personal car 
     playerCar.draw('denny')
 
   }

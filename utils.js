@@ -104,7 +104,7 @@ function reset(){
   godMode = 0
   self_driving_cars = makeCars(1, road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight);
 
-  // car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl,10)
+  car = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl,20)
   car1 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 14)
   car2 = new Car(road.getLaneCenter(laneCodes["lane 3"]), 0, standardWidth, standardHeight, "PLAYER", playerControl, 13)
 
