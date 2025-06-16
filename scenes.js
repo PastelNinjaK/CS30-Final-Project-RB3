@@ -1,3 +1,4 @@
+
 function mainGame(){
   if(godMode == 1){
     AITest();
