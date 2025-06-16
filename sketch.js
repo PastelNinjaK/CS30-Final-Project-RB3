@@ -1,5 +1,3 @@
-// Thank you for everything. May you live long, prosper, and may the force be with you.
-
 let car1;
 let car2;
 let whichCar = 0;
