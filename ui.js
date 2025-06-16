@@ -14,7 +14,7 @@ function button(x,y,w,h,minScene,num,admin = 0,isCarButton = false,carnum){
       }// end of if
       
       if(x1 && x2 && y1 && y2 && adminCondition){
-        let message = "Type Your Password: "
+        let message = "Type Your Password"
         let user_input = window.prompt(message);
         let password_condition = user_input == ("Your Password")
         if(password_condition){

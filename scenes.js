@@ -140,6 +140,7 @@ function trafficSim(){
   for(let i = 0; i < traffic.length ; i++){
     traffic[i].update(road.borders,[])
   }//end of for  
+  playerCar.controls.controlType = playerControl
   road.draw(-playerCar.y);
   scoreboard.draw(score)
   text(`Speed: ${floor(playerCar.speed) * 7 }km/h`,windowWidth * 0.85, windowHeight * 0.5)
