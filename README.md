@@ -1,7 +1,7 @@
 # CS30-Final-Project-RB3
 Code is in the master Branch
 
-Please use Firefox
+Please use Firefox.
 Chrome, Brave, Opera, etc will work too but there's this bug with the some of the ui like the lanes.
 
 This is the GitHub for my final project.
